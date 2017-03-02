@@ -1,8 +1,8 @@
-.g_ship:focused, .btn:focused{
+.g_ship:focused, .btn:focused {
     -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
 }
 
-.g_info{
+.g_info {
     -fx-pref-width: 40px;
     -fx-pref-height: 40px;
     -fx-font-size: 18px;
@@ -10,10 +10,10 @@
     -fx-background-insets: 5px;
     -fx-background-radius: 25px;
     -fx-background-color: rgba(0, 0, 0, .4);
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 0, 0, 0 , 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 0, 0, 0, 1);
 }
 
-.g_ship{
+.g_ship {
     -fx-cursor: hand;
     -fx-pref-width: 40px;
     -fx-pref-height: 40px;
@@ -21,33 +21,66 @@
     -fx-effect: none;
     -fx-opacity: 1;
 }
-.g_ship:pressed{
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 15, 0, 0 , 1);
+
+.g_ship:pressed {
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 15, 0, 0, 1);
 }
 
-.g_separator{
+.g_separator {
     -fx-pref-width: 40px;
     -fx-pref-height: 40px;
     -fx-background-color: transparent;
 }
 
-.btn{
+.btn {
     -fx-font-size: 32px;
     -fx-cursor: hand;
     -fx-background-radius: 10px;
     -fx-font-smoothing-type: lcd; /* not working ?? */
 }
 
-.btn:hover{
+.btn:hover {
     -fx-text-fill: black;
-    -fx-effect: dropshadow( three-pass-box , rgba(0, 0, 0, 0.7) , 25, 0.0 , 0 , 1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 25, 0.0, 0, 1);
 }
 
-.grid{
+.grid {
     -fx-padding: 20px;
     -fx-background-insets: 20px;
 }
 
-.background{
+.background {
     -fx-background-image: url("../bg-game.jpg");
+}
+
+.cell-ship {
+    -fx-background-color: blue;
+}
+
+.cell-damaged {
+    -fx-background-color: orange;
+}
+
+.cell-killed {
+    -fx-background-color: red;
+}
+
+.cell-empty {
+    -fx-background-color: green;
+}
+
+.cell-ship:focused {
+    -fx-background-color: blue;
+}
+
+.cell-damaged:focused {
+    -fx-background-color: orange;
+}
+
+.cell-killed:focused {
+    -fx-background-color: red;
+}
+
+.cell-empty:focused {
+    -fx-background-color: green;
 }
