@@ -1,0 +1,28 @@
+.button{
+    -fx-font-size: 32px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+    -fx-font-smoothing-type: lcd; /* not working ?? */
+}
+
+.button:focused{
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+}
+
+.button:hover{
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0, 0, 0, 0.7) , 25, 0.0 , 0 , 1);
+}
+
+.background{
+    -fx-vgap: 25px;
+    -fx-background-image: url("../bg-game.jpg");
+}
+
+.label{
+    -fx-font-size: 32px;
+}
+
+.edit{
+    -fx-font-size: 24px;
+}
