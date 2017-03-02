@@ -1,21 +1,22 @@
 package nbattle;
 
-import com.sun.media.jfxmediaimpl.platform.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainController {
+    private static final int MAX_CEILS = 10;
+    private static ArrayList<Cell> fieldFriend = new ArrayList<>(), fieldEnemy = new ArrayList<>();
+
     @FXML
     private Button mainStart, mainNet, btnQuit, btnMain;
 
@@ -40,25 +41,50 @@ public class MainController {
 
             String btnText;
 
-            for(int i = 0; i < 10*2+2+1; i++){
+            for(int i = 0; i < MAX_CEILS*2+2+1; i++){
                 gameGrid.addColumn(i);
 
-                for(int j = 0; j < 10+1; j++) {
+                for(int j = 0; j < MAX_CEILS+1; j++) {
                     btnText = "";
-                    Button btn = new Button();
+                    Cell btn = new Cell();
 
-                    if(j == 0 && i > 0 && i != 12-1 && i != 10*2+2+1 - 1){
-                        btnText = alphabet[(i-1)%11];
+                    if(j == 0 && i > 0 && i != MAX_CEILS+2 - 1 && i != MAX_CEILS*2+2+1 - 1){
+                        btnText = alphabet[(i-1) % 11];
                         btn.getStyleClass().add("g_info");
-                    }else if(j > 0 && (i == 0 || i == 10*2+2+1 - 1)){
+                    }else if(j > 0 && (i == 0 || i == MAX_CEILS*2+2+1 - 1)){
                         btnText = Integer.toString(j-1);
                         btn.getStyleClass().add("g_info");
                     }else if(j == 0 && i == 0
-                        || j == 0 && i == 10*2+2+1 - 1
-                        || i == 12 - 1){
+                        || j == 0 && i == MAX_CEILS*2+2+1 - 1
+                        || i == MAX_CEILS + 2 - 1){
                         btn.getStyleClass().add("g_separator");
                     }else{
-                        btn.getStyleClass().add("g_button");
+                        btn.getStyleClass().add("g_ship");
+
+                        if(i <= MAX_CEILS){
+                            btn.setDisable(true);
+
+                            btn.mine = true;
+                            btn.x = j-1;
+                            btn.y = i-1;
+
+                            fieldFriend.add(btn);
+                        }else{
+                            btn.mine = false;
+                            btn.x = j-1;
+                            btn.y = i-1 - 11;
+
+                            fieldEnemy.add(btn);
+                        }
+
+                        btn.setOnAction(event -> {
+                            Cell cthis = (Cell)event.getSource();
+                            if(cthis.mine){
+                                return;
+                            }
+
+                            handleClick(cthis);
+                        });
                     }
 
                     btn.setText(btnText);
@@ -82,6 +108,10 @@ public class MainController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void handleClick(Cell cell){
+        System.out.println("Clicked: " + cell.x + ":" + cell.y);
     }
 
     public void setMainApp(Main main){

@@ -1,4 +1,4 @@
-.g_button:focused, .btn:focused{
+.g_ship:focused, .btn:focused{
     -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
 }
 
@@ -13,15 +13,15 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 0, 0, 0 , 1);
 }
 
-.g_button{
+.g_ship{
     -fx-cursor: hand;
     -fx-pref-width: 40px;
     -fx-pref-height: 40px;
     -fx-font-size: 16px;
     -fx-effect: none;
+    -fx-opacity: 1;
 }
-
-.g_button:pressed{
+.g_ship:pressed{
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 15, 0, 0 , 1);
 }
 
