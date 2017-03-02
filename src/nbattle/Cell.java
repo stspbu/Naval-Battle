@@ -8,9 +8,5 @@ public class Cell extends Button {
     int id;
     int type;
     boolean mine;
-
-    public Cell(){
-        super();
-    }
 }
 
