@@ -10,8 +10,8 @@ public class GameLogic {
     public static boolean step = true, gameOver = false;
     public static int countDeathFriend = 0, countDeathEnemy = 0;
 
-    // в предположении что корабль ставится корректно
-    private static void setShip(int shipSize, boolean vertical, int xPos, int yPos, boolean isLeftSide) {
+    // Старая версия постановки корабля на поле.
+    private static void setShipOld(int shipSize, boolean vertical, int xPos, int yPos, boolean isLeftSide) {
         if (isLeftSide)
             idFriend++;
         else
@@ -25,7 +25,7 @@ public class GameLogic {
                 } else {
                     getCell(fieldEnemy, xPos, yPos + i).type = 1;
                     getCell(fieldEnemy, xPos, yPos + i).id = idEnemy;
-                    getCell(fieldEnemy, xPos, yPos + i).getStyleClass().add("cell-ship");
+                    //getCell(fieldEnemy, xPos, yPos + i).getStyleClass().add("cell-ship");
                 }
             }
         } else {
@@ -37,12 +37,73 @@ public class GameLogic {
                 } else {
                     getCell(fieldEnemy, xPos + i, yPos).type = 1;
                     getCell(fieldEnemy, xPos + i, yPos).id = idEnemy;
-                    getCell(fieldEnemy, xPos + i, yPos).getStyleClass().add("cell-ship");
+                    //getCell(fieldEnemy, xPos + i, yPos).getStyleClass().add("cell-ship");
                 }
             }
         }
     }
 
+    // Постановка корабля на поле.
+    private static void setShip(int shipSize, boolean vertical, int xPos, int yPos, boolean isLeftSide) {
+        if (isLeftSide)
+            idFriend++;
+        else
+            idEnemy++;
+        if (vertical) {
+            for (int i = 0; i < shipSize; i++) {
+                if (isLeftSide) {
+                    setCellShip(fieldFriend, xPos, yPos + i, i, shipSize, idFriend, vertical);
+                } else {
+                    setCellShip(fieldEnemy, xPos, yPos + i, i, shipSize, idEnemy, vertical);
+                }
+            }
+        } else {
+            for (int i = 0; i < shipSize; i++) {
+                if (isLeftSide) {
+                    setCellShip(fieldFriend, xPos + i, yPos, i, shipSize, idFriend, vertical);
+                } else {
+                    setCellShip(fieldEnemy, xPos + i, yPos, i, shipSize, idEnemy, vertical);
+                }
+            }
+        }
+    }
+
+    // Постановка блока корабля на поле.
+    private static void setCellShip(ArrayList<Cell> field, int xPos, int yPos, int i, int shipSize, int idShip, boolean vertical) {
+        getCell(field, xPos, yPos).type = 1;
+        getCell(field, xPos, yPos).id = idShip;
+        if (field.equals(fieldFriend))
+            getCell(field, xPos, yPos).getStyleClass().add("cell-ship");
+        if (shipSize == 1) {
+            getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
+            if (vertical)
+                getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
+            else
+                getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
+        } else {
+            if (i == 0) {
+                getCell(field, xPos, yPos).bodyType = Cell.BodyType.Head;
+                if (vertical)
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-vertical");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-horizontal");
+            } else if (i == shipSize - 1) {
+                getCell(field, xPos, yPos).bodyType = Cell.BodyType.BackSide;
+                if (vertical)
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-vertical");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-horizontal");
+            } else {
+                getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
+                if (vertical)
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
+            }
+        }
+    }
+
+    // Проверка на корректность растановки кораблей.
     private static boolean isCorrect(int sizeShip, boolean vertical, int xPos, int yPos, boolean isLeft) {
         if (vertical) {
             for (int i = yPos - 1; i < yPos + sizeShip + 1; i++) {
@@ -69,8 +130,8 @@ public class GameLogic {
         }
     }
 
-    //после вызова этой функции текущие данные будут потерены
-    public static void randomPlacer(ArrayList<Cell> cells, boolean isLeft) {
+    // После вызова этой функции текущие данные будут потерены.
+    public static void randomPlacer(boolean isLeft) {
         Random rnd = new Random();
         if (isLeft) {
             for (int i = 0; i < 10; i++) {
@@ -121,7 +182,7 @@ public class GameLogic {
         }
     }
 
-    // Метод определения состояния корабля (на плаву/затонул)
+    // Метод определения состояния корабля (на плаву/затонул).
     public static boolean isDead(ArrayList<Cell> field, int idCell) {
         for (Cell cell : field)
             if (cell.id == idCell && cell.type == 1)
@@ -226,5 +287,12 @@ public class GameLogic {
                     }
             }
         }
+    }
+
+    public static boolean isWin(ArrayList<Cell> field) {
+        for (Cell cell : field)
+            if (cell.type == 1)
+                return false;
+        return true;
     }
 }

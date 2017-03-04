@@ -107,8 +107,8 @@ public class MainController {
                     gameGrid.add(btn, i, j);
                 }
             }
-            randomPlacer(fieldFriend, true);
-            randomPlacer(fieldEnemy, false);
+            randomPlacer(true);
+            randomPlacer(false);
             GameLoop gameLoop = new GameLoop();
         } else if (e.getSource() == mainNet) {
             //get reference to the button's stage
@@ -122,7 +122,7 @@ public class MainController {
             return;
         }
 
-        //create a new scene with root and set the stage
+        // Create a new scene with root and set the stage.
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -132,6 +132,10 @@ public class MainController {
         System.out.println("Clicked: " + cell.x + ":" + cell.y);
         if (step && !gameOver) {
             checkField(cell.x, cell.y, step, fieldEnemy);
+            if (isWin(fieldEnemy))
+                for (Cell cellX : fieldEnemy) {
+                    cellX.getStyleClass().add("cell-gameover");
+                }
         }
     }
 

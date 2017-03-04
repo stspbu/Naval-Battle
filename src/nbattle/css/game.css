@@ -53,34 +53,58 @@
     -fx-background-image: url("../bg-game.jpg");
 }
 
-.cell-ship {
-    -fx-background-color: blue;
+.cell-ship, .cell-ship:focused {
+    -fx-background-image: url("../body.jpg");
+    -fx-background-position: center;
+    -fx-background-size: 256px;
 }
 
-.cell-damaged {
-    -fx-background-color: orange;
+.cell-damaged, .cell-damaged:focused {
+    /*-fx-background-image: none;
+    -fx-background-color: red;*/
+    -fx-background-image: url("../damaged.png");
+    -fx-background-position: center;
+    -fx-background-size: 128px;
 }
 
-.cell-killed {
-    -fx-background-color: red;
+.cell-killed, .cell-killed:focused {
+    -fx-background-image: url("../damaged.png");
+    -fx-background-position: center;
+    -fx-background-size: 128px;
+    /*-fx-background-image: none;
+    -fx-background-color: red;*/
 }
 
-.cell-empty {
+.cell-empty, .cell-empty:focused {
+    -fx-background-image: none;
     -fx-background-color: green;
 }
 
-.cell-ship:focused {
-    -fx-background-color: blue;
-}
-
-.cell-damaged:focused {
-    -fx-background-color: orange;
-}
-
-.cell-killed:focused {
+.cell-gameover, .cell-gameover:focused {
+    -fx-background-image: none;
     -fx-background-color: red;
 }
 
-.cell-empty:focused {
-    -fx-background-color: green;
+.cell-body-vertical {
+
+}
+
+.cell-body-horizontal {
+
+}
+
+.cell-head-vertical {
+
+}
+
+.cell-head-horizontal {
+
+}
+
+.cell-backside-vertical {
+
+}
+
+.cell-backside-horizontal {
+
 }
