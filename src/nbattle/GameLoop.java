@@ -28,14 +28,17 @@ public class GameLoop implements Runnable {
             }
 
             // Инструкции ходов для бота.
-            if (!step && !gameOver) {
+            if (!step && !gameOver && isRun) {
                 if (bot.getIsTargeted()) {
                     point = bot.nextDamage(fieldFriend);
-                    checkField(point.x, point.y, step, fieldFriend);
                 } else {
                     point = bot.getCoord(fieldFriend);
-                    checkField(point.x, point.y, step, fieldFriend);
                 }
+                checkField(point.x, point.y, step, fieldFriend);
+                if (isWin(fieldFriend))
+                    for (Cell cell : fieldFriend) {
+                        cell.getStyleClass().add("cell-gameover");
+                    }
             }
         }
     }
