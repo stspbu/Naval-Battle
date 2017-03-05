@@ -44,61 +44,61 @@ public class GameLogic {
     }
 
     // Постановка корабля на поле.
-    private static void setShip(int shipSize, boolean vertical, int xPos, int yPos, boolean isLeftSide) {
+    private static void setShip(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
         if (isLeftSide)
             idFriend++;
         else
             idEnemy++;
-        if (vertical) {
+        if (horizontal) {
             for (int i = 0; i < shipSize; i++) {
                 if (isLeftSide) {
-                    setCellShip(fieldFriend, xPos, yPos + i, i, shipSize, idFriend, vertical);
+                    setCellShip(fieldFriend, xPos, yPos + i, i, shipSize, idFriend, horizontal);
                 } else {
-                    setCellShip(fieldEnemy, xPos, yPos + i, i, shipSize, idEnemy, vertical);
+                    setCellShip(fieldEnemy, xPos, yPos + i, i, shipSize, idEnemy, horizontal);
                 }
             }
         } else {
             for (int i = 0; i < shipSize; i++) {
                 if (isLeftSide) {
-                    setCellShip(fieldFriend, xPos + i, yPos, i, shipSize, idFriend, vertical);
+                    setCellShip(fieldFriend, xPos + i, yPos, i, shipSize, idFriend, horizontal);
                 } else {
-                    setCellShip(fieldEnemy, xPos + i, yPos, i, shipSize, idEnemy, vertical);
+                    setCellShip(fieldEnemy, xPos + i, yPos, i, shipSize, idEnemy, horizontal);
                 }
             }
         }
     }
 
     // Постановка блока корабля на поле.
-    private static void setCellShip(ArrayList<Cell> field, int xPos, int yPos, int i, int shipSize, int idShip, boolean vertical) {
+    private static void setCellShip(ArrayList<Cell> field, int xPos, int yPos, int i, int shipSize, int idShip, boolean horizontal) {
         getCell(field, xPos, yPos).type = 1;
         getCell(field, xPos, yPos).id = idShip;
         if (field.equals(fieldFriend))
             getCell(field, xPos, yPos).getStyleClass().add("cell-ship");
         if (shipSize == 1) {
             getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
-            if (vertical)
-                getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
-            else
+            if (horizontal)
                 getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
+            else
+                getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
         } else {
             if (i == 0) {
                 getCell(field, xPos, yPos).bodyType = Cell.BodyType.Head;
-                if (vertical)
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-vertical");
-                else
+                if (horizontal)
                     getCell(field, xPos, yPos).getStyleClass().add("cell-head-horizontal");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-vertical");
             } else if (i == shipSize - 1) {
                 getCell(field, xPos, yPos).bodyType = Cell.BodyType.BackSide;
-                if (vertical)
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-vertical");
-                else
+                if (horizontal)
                     getCell(field, xPos, yPos).getStyleClass().add("cell-backside-horizontal");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-vertical");
             } else {
                 getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
-                if (vertical)
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
-                else
+                if (horizontal)
                     getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
+                else
+                    getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
             }
         }
     }
