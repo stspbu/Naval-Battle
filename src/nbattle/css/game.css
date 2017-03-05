@@ -14,12 +14,18 @@
 }
 
 .g_ship {
+    -fx-background-insets: 0; /* removes stupid border */
+
     -fx-cursor: hand;
     -fx-pref-width: 40px;
     -fx-pref-height: 40px;
     -fx-font-size: 16px;
     -fx-effect: none;
     -fx-opacity: 1;
+
+    -fx-background-image: url("../water.jpg");
+    -fx-background-position: center;
+    -fx-background-size: 324px;
 }
 
 .g_ship:pressed {
@@ -53,75 +59,59 @@
     -fx-background-image: url("../bg-game.jpg");
 }
 
-.cell-ship, .cell-ship:focused {
-    -fx-background-image: url("../body.jpg");
-    -fx-background-position: center;
-    -fx-background-size: 256px;
-}
-
-.cell-damaged, .cell-damaged:focused {
-    /*-fx-background-image: none;
-    -fx-background-color: red;*/
-    -fx-background-image: url("../damaged.png");
-    -fx-background-position: center;
-    -fx-background-size: 128px;
-}
-
-.cell-killed, .cell-killed:focused {
-    -fx-background-image: url("../damaged.png");
-    -fx-background-position: center;
-    -fx-background-size: 128px;
-    /*-fx-background-image: none;
-    -fx-background-color: red;*/
-}
-
 .cell-empty, .cell-empty:focused {
-    -fx-background-image: none;
-    -fx-background-color: green;
-}
-
-.cell-gameover, .cell-gameover:focused {
-    -fx-background-image: none;
-    -fx-background-color: red;
-}
-
-.cell-body-horizontal {
-    -fx-background-image: url("../bodyM.png");
+    -fx-background-image:  url("../water.jpg"), url("../empty.png");
     -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 324px, 36px;
+}
+
+.cell-body-horizontal, .cell-body-vertical {
+    -fx-background-image: url("../water.jpg"), url("../body.png");
+    -fx-background-position: center;
+    -fx-background-size: 324px, cover;
 }
 
 .cell-body-vertical {
-    -fx-background-image: url("../bodyM.png");
-    -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-image: url("../water-90.jpg"), url("../body.png");
+    -fx-background-size: 200px, cover;
     -fx-rotate: 90deg;
 }
 
-.cell-head-horizontal {
-    -fx-background-image: url("../head.png");
+.cell-head-horizontal, .cell-head-vertical {
+    -fx-background-image: url("../water-180.jpg"), url("../head.png");
     -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-size: 324px, cover;
     -fx-rotate: 180deg;
 }
 
 .cell-head-vertical {
-    -fx-background-image: url("../head.png");
-    -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-image: url("../water-270.jpg"), url("../head.png");
+    -fx-background-size: 200px, cover;
     -fx-rotate: 270deg;
 }
 
-.cell-backside-horizontal {
-    -fx-background-image: url("../nmtail.png");
+.cell-backside-horizontal, .cell-backside-vertical {
+    -fx-background-image: url("../water-180.jpg"), url("../tail.png");
     -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-size: 324px, cover;
     -fx-rotate: 180deg; /* 0 */
 }
 
 .cell-backside-vertical {
-    -fx-background-image: url("../nmtail.png");
-    -fx-background-position: center;
-    -fx-background-size: cover;
+    -fx-background-image: url("../water-270.jpg"), url("../tail.png");
+    -fx-background-size: 200px, cover;
     -fx-rotate: 270deg; /* 90 */
+}
+
+.cell-damaged, .cell-damaged:focused, .cell-killed, .cell-killed:focused {
+    -fx-background-image: url("../water.jpg"), url("../damaged.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 324px, 64px;
+    -fx-rotate: 0;
+}
+
+.no-clickable:pressed, .no-clickable:focused{
+    -fx-effect: none;
 }

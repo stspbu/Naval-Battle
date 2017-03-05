@@ -134,7 +134,7 @@ public class MainController {
             checkField(cell.x, cell.y, step, fieldEnemy);
             if (isWin(fieldEnemy))
                 for (Cell cellX : fieldEnemy) {
-                    cellX.getStyleClass().add("cell-gameover");
+                    cellX.getStyleClass().add("cell-damaged");
                 }
         }
     }

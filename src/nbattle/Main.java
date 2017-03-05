@@ -8,7 +8,6 @@ import javafx.stage.StageStyle;
 
 import static nbattle.MainController.isRun;
 
-
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {

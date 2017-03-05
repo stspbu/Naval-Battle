@@ -37,7 +37,7 @@ public class GameLoop implements Runnable {
                 checkField(point.x, point.y, step, fieldFriend);
                 if (isWin(fieldFriend))
                     for (Cell cell : fieldFriend) {
-                        cell.getStyleClass().add("cell-gameover");
+                        cell.getStyleClass().add("cell-damaged");
                     }
             }
         }

@@ -16,6 +16,7 @@ public class GameLogic {
             idFriend++;
         else
             idEnemy++;
+
         if (vertical) {
             for (int i = 0; i < shipSize; i++) {
                 if (isLeftSide) {
@@ -197,8 +198,20 @@ public class GameLogic {
         Cell cellN = getCell(field, dx, dy);
         if (isDead(field, getCell(field, dx, dy).id))
             countDeath++;
-        if ((getCell(field, dx, dy).type != 1) && (getCell(field, dx, dy).type != 2) && (getCell(field, dx, dy).type != 3) && (getCell(field, dx, dy).type != 4))
+        if ((getCell(field, dx, dy).type != 1) && (getCell(field, dx, dy).type != 2) && (getCell(field, dx, dy).type != 3) && (getCell(field, dx, dy).type != 4)){
             step = !nextStep;
+
+            if(!step){
+                for ( Cell cell : fieldEnemy){
+                    cell.getStyleClass().add("no-clickable");
+                }
+            }else{
+                for ( Cell cell : fieldEnemy){
+                    cell.getStyleClass().remove("no-clickable");
+                }
+            }
+        }
+
         if (getCell(field, dx, dy).type == 0) {
             getCell(field, dx, dy).type = 3;
             getCell(field, dx, dy).getStyleClass().add("cell-empty");
