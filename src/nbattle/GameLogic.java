@@ -72,33 +72,34 @@ public class GameLogic {
     private static void setCellShip(ArrayList<Cell> field, int xPos, int yPos, int i, int shipSize, int idShip, boolean horizontal) {
         getCell(field, xPos, yPos).type = 1;
         getCell(field, xPos, yPos).id = idShip;
-        if (field.equals(fieldFriend))
-            getCell(field, xPos, yPos).getStyleClass().add("cell-ship");
-        if (shipSize == 1) {
-            getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
-            if (horizontal)
-                getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
-            else
-                getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
-        } else {
-            if (i == 0) {
-                getCell(field, xPos, yPos).bodyType = Cell.BodyType.Head;
-                if (horizontal)
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-horizontal");
-                else
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-head-vertical");
-            } else if (i == shipSize - 1) {
-                getCell(field, xPos, yPos).bodyType = Cell.BodyType.BackSide;
-                if (horizontal)
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-horizontal");
-                else
-                    getCell(field, xPos, yPos).getStyleClass().add("cell-backside-vertical");
-            } else {
+        if (field.equals(fieldFriend)) {
+            //getCell(field, xPos, yPos).getStyleClass().add("cell-ship");
+            if (shipSize == 1) {
                 getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
                 if (horizontal)
                     getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
                 else
                     getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
+            } else {
+                if (i == 0) {
+                    getCell(field, xPos, yPos).bodyType = Cell.BodyType.Head;
+                    if (horizontal)
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-head-horizontal");
+                    else
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-head-vertical");
+                } else if (i == shipSize - 1) {
+                    getCell(field, xPos, yPos).bodyType = Cell.BodyType.BackSide;
+                    if (horizontal)
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-backside-horizontal");
+                    else
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-backside-vertical");
+                } else {
+                    getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
+                    if (horizontal)
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-body-horizontal");
+                    else
+                        getCell(field, xPos, yPos).getStyleClass().add("cell-body-vertical");
+                }
             }
         }
     }
