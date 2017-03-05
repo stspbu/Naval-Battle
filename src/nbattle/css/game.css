@@ -85,26 +85,43 @@
     -fx-background-color: red;
 }
 
-.cell-body-vertical {
-
-}
-
 .cell-body-horizontal {
-
+    -fx-background-image: url("../bodyM.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }
 
-.cell-head-vertical {
-
+.cell-body-vertical {
+    -fx-background-image: url("../bodyM.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-rotate: 90deg;
 }
 
 .cell-head-horizontal {
-
+    -fx-background-image: url("../head.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-rotate: 180deg;
 }
 
-.cell-backside-vertical {
-
+.cell-head-vertical {
+    -fx-background-image: url("../head.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-rotate: 270deg;
 }
 
 .cell-backside-horizontal {
+    -fx-background-image: url("../nmtail.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-rotate: 180deg; /* 0 */
+}
 
+.cell-backside-vertical {
+    -fx-background-image: url("../nmtail.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-rotate: 270deg; /* 90 */
 }
