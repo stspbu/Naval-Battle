@@ -4,16 +4,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.FlowPane?>
 
-<FlowPane alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="640.0" prefWidth="960.0" styleClass="background" stylesheets="@css/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
-   <children>
-      <Button fx:id="mainStart" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Start game">
-         <opaqueInsets>
-            <Insets top="80.0" />
-         </opaqueInsets></Button>
-      <Button fx:id="mainNet" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Network mode" />
-      <Button fx:id="btnQuit" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Quit" />
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+<FlowPane alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" orientation="VERTICAL" prefHeight="640.0" prefWidth="960.0" styleClass="background"
+          stylesheets="@css/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="nbattle.MainController">
+    <children>
+        <Button fx:id="mainStart" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#buttonListener"
+                styleClass="button" text="Start game">
+            <opaqueInsets>
+                <Insets top="80.0"/>
+            </opaqueInsets>
+        </Button>
+        <Button fx:id="mainNet" mnemonicParsing="false" onAction="#buttonListener" styleClass="button"
+                text="Network mode"/>
+        <Button fx:id="btnQuit" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Quit"/>
+    </children>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
 </FlowPane>
