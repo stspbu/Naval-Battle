@@ -4,11 +4,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 
-<FlowPane accessibleRole="TEXT_FIELD" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="640.0" prefWidth="960.0" styleClass="background" stylesheets="@css/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
-   <children>
-      <Button fx:id="netCreate" mnemonicParsing="false" styleClass="button" text="Create game" />
-      <Button fx:id="netFind" mnemonicParsing="false" styleClass="button" text="Find game" />
-      <TextField fx:id="netNick" focusTraversable="false" promptText="Enter your nickname" styleClass="edit" />
-      <Button fx:id="btnMain" mnemonicParsing="false" onAction="#buttonListener" text="Main menu" />
-   </children>
+<FlowPane accessibleRole="TEXT_FIELD" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity"
+          maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="640.0"
+          prefWidth="960.0" styleClass="background" stylesheets="@css/main.css" xmlns="http://javafx.com/javafx/8.0.112"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+    <children>
+        <Button fx:id="netCreate" mnemonicParsing="false" styleClass="button" text="Create game"/>
+        <Button fx:id="netFind" mnemonicParsing="false" styleClass="button" text="Find game"/>
+        <TextField fx:id="netNick" focusTraversable="false" promptText="Enter your nickname" styleClass="edit"/>
+        <Button fx:id="btnMain" mnemonicParsing="false" onAction="#buttonListener" text="Main menu"/>
+    </children>
 </FlowPane>
