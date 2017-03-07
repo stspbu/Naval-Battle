@@ -23,9 +23,11 @@
 
 /* HBox */
 .t_row{
+    -fx-background-color: #2F2F2F;
 }
 
 .t_id{
+    -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-pref-width: 100px;
     -fx-padding: 0 15px 0 15px;
@@ -35,6 +37,8 @@
 }
 
 .t_game{
+    -fx-text-fill: #eeeeee;
+
     -fx-font-size: 24px;
     -fx-pref-width: 480px;
     /* 20 px scroll bar */
@@ -43,7 +47,6 @@
 }
 
 .t_row:hover .t_id, .t_row:hover .t_game{
-    -fx-text-fill: white;
     -fx-background-color: black, rgba(255, 20, 20, .4);
 }
 

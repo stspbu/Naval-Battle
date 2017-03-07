@@ -2,6 +2,7 @@
     -fx-font-size: 32px;
     -fx-cursor: hand;
     -fx-background-radius: 10px;
+    -fx-background-insets: 0; /* removes stupid border */
     -fx-font-smoothing-type: lcd; /* not working ?? */
 }
 
@@ -12,17 +13,4 @@
 .button:hover {
     -fx-text-fill: black;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 25, 0.0, 0, 1);
-}
-
-.background {
-    -fx-vgap: 25px;
-    -fx-background-image: url("../images/bg-game.jpg");
-}
-
-.label {
-    -fx-font-size: 32px;
-}
-
-.edit {
-    -fx-font-size: 24px;
 }

@@ -80,7 +80,7 @@ public class JsonUtils {
     }
 
     // Парсим некоторые данные создании игры.
-    public static boolean parseCreateJson(String resultJson) {
+    public static String parseCreateJson(String resultJson) {
         try {
             // Конвертируем строку с Json в JSONObject для дальнейшего его парсинга.
             JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
@@ -90,7 +90,7 @@ public class JsonUtils {
 
             if (gamesJsonObject.get("info") == null) {
                 System.out.println("ID игры: " + gamesJsonObject.get("id"));
-                return true;
+                return gamesJsonObject.get("id").toString();
             }
 
             System.out.println("Сообщение: " + gamesJsonObject.get("info"));
@@ -99,7 +99,7 @@ public class JsonUtils {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
     public static boolean parseConnectJson(String resultJson) {

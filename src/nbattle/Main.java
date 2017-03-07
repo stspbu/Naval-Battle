@@ -9,6 +9,9 @@ import javafx.stage.StageStyle;
 import static nbattle.MainController.isRun;
 
 public class Main extends Application {
+    /* NETWORK PARAMS */
+    public static String sNetId = "", sNetNick = "";
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         isRun = true;
@@ -16,7 +19,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("main.fxml"));
 
         //primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setTitle("Naval Battle");
+        primaryStage.setTitle(MainController.APP_TITLE);
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.show();
 
@@ -24,7 +27,6 @@ public class Main extends Application {
 
         // Даём контроллеру доступ к главному приложению.
         MainController controller = loader.getController();
-        controller.setMainApp(this);
     }
 
 
