@@ -23,7 +23,7 @@
     -fx-effect: none;
     -fx-opacity: 1;
 
-    -fx-background-image: url("../water.jpg");
+    -fx-background-image: url("../images/water.jpg");
     -fx-background-position: center;
     -fx-background-size: 324px;
 }
@@ -56,56 +56,56 @@
 }
 
 .background {
-    -fx-background-image: url("../bg-game.jpg");
+    -fx-background-image: url("../images/bg-game.jpg");
 }
 
 .cell-empty, .cell-empty:focused {
-    -fx-background-image:  url("../water.jpg"), url("../empty.png");
+    -fx-background-image:  url("../images/water.jpg"), url("../images/empty.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 324px, 36px;
 }
 
 .cell-body-horizontal, .cell-body-vertical {
-    -fx-background-image: url("../water.jpg"), url("../body.png");
+    -fx-background-image: url("../images/water.jpg"), url("../images/body.png");
     -fx-background-position: center;
     -fx-background-size: 324px, cover;
 }
 
 .cell-body-vertical {
-    -fx-background-image: url("../water-90.jpg"), url("../body.png");
+    -fx-background-image: url("../images/water-90.jpg"), url("../images/body.png");
     -fx-background-size: 200px, cover;
     -fx-rotate: 90deg;
 }
 
 .cell-head-horizontal, .cell-head-vertical {
-    -fx-background-image: url("../water-180.jpg"), url("../head.png");
+    -fx-background-image: url("../images/water-180.jpg"), url("../images/head.png");
     -fx-background-position: center;
     -fx-background-size: 324px, cover;
     -fx-rotate: 180deg;
 }
 
 .cell-head-vertical {
-    -fx-background-image: url("../water-270.jpg"), url("../head.png");
+    -fx-background-image: url("../images/water-270.jpg"), url("../images/head.png");
     -fx-background-size: 200px, cover;
     -fx-rotate: 270deg;
 }
 
 .cell-backside-horizontal, .cell-backside-vertical {
-    -fx-background-image: url("../water-180.jpg"), url("../tail.png");
+    -fx-background-image: url("../images/water-180.jpg"), url("../images/tail.png");
     -fx-background-position: center;
     -fx-background-size: 324px, cover;
     -fx-rotate: 180deg; /* 0 */
 }
 
 .cell-backside-vertical {
-    -fx-background-image: url("../water-270.jpg"), url("../tail.png");
+    -fx-background-image: url("../images/water-270.jpg"), url("../images/tail.png");
     -fx-background-size: 200px, cover;
     -fx-rotate: 270deg; /* 90 */
 }
 
 .cell-damaged, .cell-damaged:focused, .cell-killed, .cell-killed:focused {
-    -fx-background-image: url("../water.jpg"), url("../damaged.png");
+    -fx-background-image: url("../images/water.jpg"), url("../images/damaged.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 324px, 64px;
