@@ -4,25 +4,31 @@ import com.sun.istack.internal.Nullable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static nbattle.GameLogic.*;
 
 public class MainController {
     private static final int MAX_CELLS = 10;
+    private static final String MAIN_URL = "http://f0123592.xsph.ru/backend/";
     public static ArrayList<Cell> fieldFriend = new ArrayList<>(), fieldEnemy = new ArrayList<>();
     public static boolean isRun = false;
 
     @FXML
-    private Button mainStart, mainNet, btnQuit, btnMain;
+    private Button mainStart, mainNet, btnQuit, btnMain,
+            netCreate, netFind;
 
     @FXML
     public static GridPane gameGrid;
@@ -115,7 +121,37 @@ public class MainController {
             stage = (Stage) mainNet.getScene().getWindow();
             //load up OTHER FXML document
             root = FXMLLoader.load(getClass().getResource("network.fxml"));
-        } else if (e.getSource() == btnMain) {
+        } else if(e.getSource() == netFind){
+            stage = (Stage) netFind.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("find.fxml"));
+
+            ScrollPane scroll = (ScrollPane) ((Pane) root).lookup("#tableScroll");
+            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+            FlowPane table = new FlowPane();
+            table.getStyleClass().add("t_container");
+
+            // getting content
+            String resultJson = JsonUtils.parseUrl(MAIN_URL + "list.php", "");
+            JSONArray gamesArray = JsonUtils.parseListJson(resultJson);
+
+            if (gamesArray != null) {
+                for (int i = 0; i < gamesArray.size(); i++) {
+                    JSONObject gamesData = (JSONObject) gamesArray.get(i);
+                    addRowInto(table, "#" + gamesData.get("id"), gamesData.get("host").toString());
+
+                    // print out ~ debug ~
+                    // System.out.println("ID игры: " + gamesData.get("id"));
+                    /// System.out.println("Host: " + gamesData.get("host"));
+                }
+            }
+
+            for(int i = 0; i < 10; i++)
+
+            scroll.setContent(table);
+        }
+        else if (e.getSource() == btnMain) {
             stage = (Stage) btnMain.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("main.fxml"));
         } else {
@@ -159,5 +195,28 @@ public class MainController {
 
     public void setMainApp(Main main) {
         this.activity_main = main;
+    }
+
+    private void addRowInto(FlowPane table, String sid, String sgame){
+        HBox row = new HBox();
+        row.getStyleClass().add("t_row");
+
+        Label id = new Label(sid), game = new Label(sgame);
+        id.getStyleClass().add("t_id");
+        game.getStyleClass().add("t_game");
+
+        Button btn = new Button();
+        btn.getStyleClass().add("t_btn");
+
+        btn.setOnAction(event -> {
+            // handle join click
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("handle join click");
+
+            alert.showAndWait();
+        });
+
+        row.getChildren().addAll(id, game, btn);
+        table.getChildren().add(row);
     }
 }

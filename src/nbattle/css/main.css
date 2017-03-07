@@ -16,7 +16,7 @@
 
 .background {
     -fx-vgap: 25px;
-    -fx-background-image: url("../bg-game.jpg");
+    -fx-background-image: url("../images/bg-game.jpg");
 }
 
 .label {

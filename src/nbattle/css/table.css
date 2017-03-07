@@ -1,0 +1,74 @@
+/* Almost main container */
+.t_layout{
+    /* spacing for scollpane */
+
+    -fx-padding: 64px;
+    -fx-border-insets: 64px;
+}
+
+/* ScrollPane -> table parent */
+.t_scroll{
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-max-height: 352px;
+
+    -fx-padding: 0;
+
+    -fx-unit-increment: 10;
+    -fx-block-increment: 50;
+}
+/* FlowPane -> table */
+.t_container{
+}
+
+/* HBox */
+.t_row{
+}
+
+.t_id{
+    -fx-font-size: 24px;
+    -fx-pref-width: 100px;
+    -fx-padding: 0 15px 0 15px;
+
+    -fx-border-width: 0 2px 0 0;
+    -fx-border-color: black;
+}
+
+.t_game{
+    -fx-font-size: 24px;
+    -fx-pref-width: 480px;
+    /* 20 px scroll bar */
+
+    -fx-padding: 0 0 0 15px;
+}
+
+.t_row:hover .t_id, .t_row:hover .t_game{
+    -fx-text-fill: white;
+    -fx-background-color: black, rgba(255, 20, 20, .4);
+}
+
+.t_btn{
+    -fx-border-insets: 0;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+
+    -fx-background-image: url("../icons/icon_join.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 24px;
+
+    -fx-pref-width: 42px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 15.8;
+
+    /*-fx-padding: 6px 0 0 4px;
+    -fx-background-insets: 6px 0 0 4px;
+
+    -fx-background-radius: 40px;*/
+}
+
+.t_btn:hover{
+    -fx-effect: none;
+    -fx-background-color: black, rgba(0, 255, 0, .7);
+}
