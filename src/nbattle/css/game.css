@@ -38,17 +38,17 @@
     -fx-background-color: transparent;
 }
 
-.btn {
+/* .btn {
     -fx-font-size: 32px;
     -fx-cursor: hand;
     -fx-background-radius: 10px;
-    -fx-font-smoothing-type: lcd; /* not working ?? */
+    -fx-font-smoothing-type: lcd;
 }
 
 .btn:hover {
     -fx-text-fill: black;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 25, 0.0, 0, 1);
-}
+} */
 
 .grid {
     -fx-padding: 20px;

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<FlowPane accessibleRole="TEXT_FIELD" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="640.0" prefWidth="960.0" styleClass="background" stylesheets="@css/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
-    <children>
-        <Button fx:id="netCreate" mnemonicParsing="false" styleClass="button" text="Create game" />
-        <Button fx:id="netFind" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Find game" />
-        <TextField fx:id="netNick" focusTraversable="false" promptText="Enter your nickname" styleClass="edit" />
-        <Button fx:id="btnMain" mnemonicParsing="false" onAction="#buttonListener" text="Main menu" />
-    </children>
-</FlowPane>
+<AnchorPane prefHeight="640.0" prefWidth="960.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+   <children>
+       <Button fx:id="netCreate" layoutX="368.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Create game" />
+       <Button fx:id="netFind" layoutX="377.0" layoutY="286.0" mnemonicParsing="false" onAction="#buttonListener" styleClass="button" text="Find games" />
+       <TextField fx:id="netNick" focusTraversable="false" layoutX="648.0" layoutY="14.0" promptText="Enter your nickname" styleClass="edit" />
+       <Button fx:id="btnMain" layoutX="378.0" layoutY="530.0" mnemonicParsing="false" onAction="#buttonListener" text="Main menu" />
+   </children>
+    <stylesheets>
+        <URL value="@css/network.css" />
+        <URL value="@css/background.css" />
+      <URL value="@css/button.css" />
+    </stylesheets>
+</AnchorPane>

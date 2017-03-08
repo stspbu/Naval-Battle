@@ -1,0 +1,4 @@
+.background {
+    -fx-vgap: 25px;
+    -fx-background-image: url("../images/bg-game.jpg");
+}
