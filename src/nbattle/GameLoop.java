@@ -1,5 +1,7 @@
 package nbattle;
 
+import javafx.application.Platform;
+
 import java.awt.*;
 
 import static nbattle.MainController.*;
@@ -24,21 +26,29 @@ public class GameLoop implements Runnable {
                 Thread.sleep(300);       // Задерживает поток. Необходимо для того, чтобы было наглядней видно, куда кто стреляет.
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Error 01: " + e);
             }
 
             // Инструкции ходов для бота.
             if (!step && !gameOver && isRun) {
                 if (bot.getIsTargeted()) {
                     point = bot.nextDamage(fieldFriend);
-                } else {
+                }else {
                     point = bot.getCoord(fieldFriend);
                 }
-                checkField(point.x, point.y, step, fieldFriend);
-                if (isWin(fieldFriend))
-                    for (Cell cell : fieldFriend) {
-                        cell.getStyleClass().add("cell-damaged");
-                    }
+
+                // scene is modified only from original thread
+                // runLater should be where css.add styles are
+
+                Point finalPoint = point;
+                Platform.runLater(() -> {
+                    checkField(finalPoint.x, finalPoint.y, step, fieldFriend);
+
+                    if (isWin(fieldFriend))
+                        for (Cell cell : fieldFriend) {
+                            cell.getStyleClass().add("cell-damaged");
+                        }
+                });
+
             }
         }
     }

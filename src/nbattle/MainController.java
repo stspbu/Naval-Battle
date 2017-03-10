@@ -50,6 +50,7 @@ public class MainController {
             //Stage stage = (Stage) btnQuit.getScene().getWindow();
             //stage.close();
             System.exit(0);
+            // Platform.exit();
             return; // redundant ??
         }
 
@@ -225,9 +226,12 @@ public class MainController {
 
     @Nullable
     public static Cell getCell(ArrayList<Cell> field, int x, int y) {
+        /* sometimes really produce null pointer exception */
+
         for (Cell cell : field)
             if (cell.x == x && cell.y == y)
                 return cell;
+
         return null;
     }
 
