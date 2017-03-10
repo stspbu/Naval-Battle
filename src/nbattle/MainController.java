@@ -1,6 +1,7 @@
 package nbattle;
 
 import com.sun.istack.internal.Nullable;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static nbattle.JsonUtils.createDuringConnecting;
 import static nbattle.Main.*;
 import static nbattle.GameLogic.*;
 
@@ -29,10 +31,11 @@ public class MainController {
 
     private static final int MAX_CELLS = 10;
     public static final String APP_TITLE = "Naval Battle";
-    private static final String MAIN_URL = "http://f0123592.xsph.ru/backend/";
+    public static final String MAIN_URL = "http://f0123592.xsph.ru/backend/";
 
     public static ArrayList<Cell> fieldFriend = new ArrayList<>(), fieldEnemy = new ArrayList<>();
     public static boolean isRun = false;
+    public static Scene lastScene;
 
     @FXML
     private Button mainStart, mainNet, btnQuit, btnMain,
@@ -65,7 +68,7 @@ public class MainController {
             countDeathFriend = 0;
             countDeathEnemy = 0;
 
-            stage = (Stage) mainStart.getScene().getWindow();
+            stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("game.fxml"));
 
             String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ""};
@@ -127,54 +130,52 @@ public class MainController {
             randomPlacer(false);
             GameLoop gameLoop = new GameLoop();
         } else if (e.getSource() == mainNet) {
-            stage = (Stage) mainNet.getScene().getWindow();
+            stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("network.fxml"));
 
             TextField local_netNick = (TextField) root.lookup("#netNick");
 
-            if(!sNetNick.isEmpty()){
+            if (!sNetNick.isEmpty()) {
                 local_netNick.setText(sNetNick);
             }
 
             local_netNick.textProperty().addListener((observable, oldData, newData) -> {
                 newData = newData.trim();
-                if(newData.length() > MAX_LENGTH)
+                if (newData.length() > MAX_LENGTH)
                     newData = newData.substring(0, MAX_LENGTH);
 
                 sNetNick = newData;
                 local_netNick.setText(newData);
             });
-        } else if(e.getSource() == netCreate){
-            if(sNetNick.isEmpty()){
+        } else if (e.getSource() == netCreate) {
+            if (sNetNick.isEmpty()) {
                 alertShow("Incorrect nickname!", "You should enter your nickname before creating a new game.", Alert.AlertType.ERROR);
+
                 return;
-            }else{
+            } else {
                 String resultJson = JsonUtils.parseUrl(MAIN_URL + "create.php", "&host=" + sNetNick);
                 sNetId = JsonUtils.parseCreateJson(resultJson);
 
-                if(sNetId != null){
-                    stage = (Stage) netFind.getScene().getWindow();
+                if (sNetId != null) {
+                    stage = (Stage) lastScene.getWindow();
                     root = FXMLLoader.load(getClass().getResource("create.fxml"));
 
                     /* <--> id & snick are important <--> */
                     Label info = (Label) (root.lookup("#infoFlow")).lookup("#netInfo");
                     info.setText("Game id: #" + sNetId + ", name: " + sNetNick);
 
-                    /* Connection logic begins ... */
-                    /* Connection logic begins ... */
-                    /* Connection logic begins ... */
-                    /* Connection logic begins ... */
-                }else{
+                    Waiting waiting = new Waiting();
+                } else {
                     alertShow("Oops! Something's wrong!", "Nickname's in use or connection problems occurred.", Alert.AlertType.ERROR);
                     return;
                 }
             }
-        } else if(e.getSource() == netFind){
+        } else if (e.getSource() == netFind) {
             String resultJson = JsonUtils.parseUrl(MAIN_URL + "list.php", "");
             JSONArray gamesArray = JsonUtils.parseListJson(resultJson);
 
             if (gamesArray != null && gamesArray.size() > 0) {
-                stage = (Stage) netFind.getScene().getWindow();
+                stage = (Stage) lastScene.getWindow();
                 root = FXMLLoader.load(getClass().getResource("find.fxml"));
 
                 ScrollPane scroll = (ScrollPane) root.lookup("#tableScroll");
@@ -190,30 +191,24 @@ public class MainController {
                 }
 
                 scroll.setContent(table);
-
-                /* Connection logic begins ... */
-                /* Connection logic begins ... */
-                /* Connection logic begins ... */
-                /* Connection logic begins ... */
-            }else{
+            } else {
                 alertShow("Oops! Something's wrong!", "There are no active games at the moment.", Alert.AlertType.WARNING);
                 return;
             }
-        }
-        else if (e.getSource() == btnMain) {
-            stage = (Stage) btnMain.getScene().getWindow();
+        } else if (e.getSource() == btnMain) {
+            stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("main.fxml"));
         } else {
             return;
         }
 
         // Create a new scene with root and set the stage.
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        lastScene = new Scene(root);
+        stage.setScene(lastScene);
         stage.show();
     }
 
-    private void handleClick(Cell cell) {
+    private static void handleClick(Cell cell) {
         System.out.println("Clicked: " + cell.x + ":" + cell.y);
         if (step && !gameOver) {
             checkField(cell.x, cell.y, step, fieldEnemy);
@@ -245,7 +240,7 @@ public class MainController {
         return cells;
     }
 
-    private void addRowInto(FlowPane table, String sid, String sgame){
+    private void addRowInto(FlowPane table, String sid, String sgame) {
         HBox row = new HBox();
         row.getStyleClass().add("t_row");
 
@@ -258,19 +253,108 @@ public class MainController {
 
         btn.setOnAction(event -> {
             TableCell tc = (TableCell) event.getSource();
-            alertShow("Join dialog here!", "You tried to join to #" + tc.id + ", created by: " + tc.game, Alert.AlertType.INFORMATION);
+            sNetId = tc.id;
+            sNetEnemy = tc.game;
+
+            try {
+                createStage();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            randomPlacer(true);
+            randomPlacer(false);
+            String resultJson = JsonUtils.parseUrl(MAIN_URL + "connect.php", "&id=" +
+                    sNetId + "&map1=" + createDuringConnecting(coordinatesEnemy).toJSONString() + "&map2=" +
+                    createDuringConnecting(coordinatesFriend).toJSONString() + "&player=" + sNetNick);
+            System.out.println(resultJson);
         });
 
         row.getChildren().addAll(id, game, btn);
         table.getChildren().add(row);
     }
 
-    private void alertShow(String header, String content, Alert.AlertType type){
+    private void alertShow(String header, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(APP_TITLE);
         alert.setHeaderText(header);
         alert.setContentText(content);
 
         alert.showAndWait();
+    }
+
+    public static void createStage() throws IOException {
+        Stage stage;
+        Parent root;
+
+        fieldFriend.clear();
+        fieldEnemy.clear();
+        step = true;
+        gameOver = false;
+        countDeathFriend = 0;
+        countDeathEnemy = 0;
+
+        stage = (Stage) lastScene.getWindow();
+        root = FXMLLoader.load(controller.getClass().getResource("game.fxml"));
+
+        String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ""};
+        gameGrid = (GridPane) root.lookup("#gameGrid");
+
+        String btnText;
+
+        for (int i = 0; i < MAX_CELLS * 2 + 2 + 1; i++) {
+            gameGrid.addColumn(i);
+
+            for (int j = 0; j < MAX_CELLS + 1; j++) {
+                btnText = "";
+                Cell btn = new Cell();
+
+                if (j == 0 && i > 0 && i != MAX_CELLS + 2 - 1 && i != MAX_CELLS * 2 + 2 + 1 - 1) {
+                    btnText = alphabet[(i - 1) % 11];
+                    btn.getStyleClass().add("g_info");
+                } else if (j > 0 && (i == 0 || i == MAX_CELLS * 2 + 2 + 1 - 1)) {
+                    btnText = Integer.toString(j - 1);
+                    btn.getStyleClass().add("g_info");
+                } else if (j == 0 && i == 0
+                        || j == 0 && i == MAX_CELLS * 2 + 2 + 1 - 1
+                        || i == MAX_CELLS + 2 - 1) {
+                    btn.getStyleClass().add("g_separator");
+                } else {
+                    btn.getStyleClass().add("g_ship");
+
+                    if (i <= MAX_CELLS) {
+                        btn.setDisable(true);
+
+                        btn.mine = true;
+                        btn.x = j - 1;
+                        btn.y = i - 1;
+
+                        fieldFriend.add(btn);
+                    } else {
+                        btn.mine = false;
+                        btn.x = j - 1;
+                        btn.y = i - 1 - 11;
+
+                        fieldEnemy.add(btn);
+                    }
+
+                    btn.setOnAction(event -> {
+                        Cell cthis = (Cell) event.getSource();
+                        if (cthis.mine) {
+                            return;
+                        }
+
+                        handleClick(cthis);
+                    });
+                }
+
+                btn.setText(btnText);
+                gameGrid.add(btn, i, j);
+            }
+        }
+
+        // Create a new scene with root and set the stage.
+        lastScene = new Scene(root);
+        stage.setScene(lastScene);
+        stage.show();
     }
 }

@@ -9,47 +9,28 @@ public class GameLogic {
     private static int idFriend = 0, idEnemy = 0;
     public static boolean step = true, gameOver = false;
     public static int countDeathFriend = 0, countDeathEnemy = 0;
-
-    // Старая версия постановки корабля на поле.
-    private static void setShipOld(int shipSize, boolean vertical, int xPos, int yPos, boolean isLeftSide) {
-        if (isLeftSide)
-            idFriend++;
-        else
-            idEnemy++;
-
-        if (vertical) {
-            for (int i = 0; i < shipSize; i++) {
-                if (isLeftSide) {
-                    getCell(fieldFriend, xPos, yPos + i).type = 1;
-                    getCell(fieldFriend, xPos, yPos + i).id = idFriend;
-                    getCell(fieldFriend, xPos, yPos + i).getStyleClass().add("cell-ship");
-                } else {
-                    getCell(fieldEnemy, xPos, yPos + i).type = 1;
-                    getCell(fieldEnemy, xPos, yPos + i).id = idEnemy;
-                    //getCell(fieldEnemy, xPos, yPos + i).getStyleClass().add("cell-ship");
-                }
-            }
-        } else {
-            for (int i = 0; i < shipSize; i++) {
-                if (isLeftSide) {
-                    getCell(fieldFriend, xPos + i, yPos).type = 1;
-                    getCell(fieldFriend, xPos + i, yPos).id = idFriend;
-                    getCell(fieldFriend, xPos + i, yPos).getStyleClass().add("cell-ship");
-                } else {
-                    getCell(fieldEnemy, xPos + i, yPos).type = 1;
-                    getCell(fieldEnemy, xPos + i, yPos).id = idEnemy;
-                    //getCell(fieldEnemy, xPos + i, yPos).getStyleClass().add("cell-ship");
-                }
-            }
-        }
-    }
+    public static int[][][] coordinatesEnemy = new int[10][3][1];
+    public static int[][][] coordinatesFriend = new int[10][3][1];
 
     // Постановка корабля на поле.
     private static void setShip(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
-        if (isLeftSide)
+        if (isLeftSide) {
+            coordinatesFriend[idFriend][0][0] = xPos;
+            coordinatesFriend[idFriend][1][0] = yPos;
+            coordinatesFriend[idFriend][2][0] = (horizontal) ? 1 : 0;
             idFriend++;
-        else
+            if (idFriend > 9)
+                idFriend = 0;
+        }
+        else {
+            coordinatesEnemy[idEnemy][0][0] = xPos;
+            coordinatesEnemy[idEnemy][1][0] = yPos;
+            coordinatesEnemy[idEnemy][2][0] = (horizontal) ? 1 : 0;
             idEnemy++;
+            if (idEnemy > 9)
+                idEnemy = 0;
+        }
+
         if (horizontal) {
             for (int i = 0; i < shipSize; i++) {
                 if (isLeftSide) {

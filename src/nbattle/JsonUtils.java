@@ -1,5 +1,6 @@
 package nbattle;
 
+import com.sun.istack.internal.Nullable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -12,6 +13,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
+
+import static nbattle.Main.sNetNick;
 
 public class JsonUtils {
     private static final String HASH = "BN45CJLI149XCdp434xhzzzLKxCKnBP1432lkU";
@@ -122,7 +127,9 @@ public class JsonUtils {
         return false;
     }
 
-    public static boolean parseStatusJson(String resultJson) {
+    @Nullable
+    public static ArrayList<String> parseStatusJson(String resultJson) {
+        ArrayList<String> list = new ArrayList<>();
         try {
             JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
 
@@ -131,16 +138,18 @@ public class JsonUtils {
             if (gamesJsonObject.get("info") == null) {
                 System.out.println("Кто таков? " + gamesJsonObject.get("player"));
                 System.out.println("Кто ходит? " + gamesJsonObject.get("mover"));
-                return true;
+                list.add(gamesJsonObject.get("player").toString());
+                list.add(gamesJsonObject.get("mover").toString());
+                return list;
+            } else if (gamesJsonObject.get("info") != "waiting") {
+                System.out.println("Ошибка: " + gamesJsonObject.get("info"));
             }
-
-            System.out.println("Ошибка: " + gamesJsonObject.get("info"));
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
     public static boolean parseDeleteJson(String resultJson) {
@@ -171,5 +180,23 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static JSONObject createDuringConnecting(int[][][] matrix) {
+        JSONArray ar = new JSONArray();
+        JSONArray dummy;
+        JSONObject resultJson = new JSONObject();
+        for (int i = 0; i < 10; i++) {
+            dummy = new JSONArray();
+            dummy.add(matrix[i][0][0]);
+            dummy.add(matrix[i][1][0]);
+            dummy.add(matrix[i][2][0]);
+            ar.add(dummy);
+        }
+
+        resultJson.put("map", ar);
+        System.out.println(resultJson.toJSONString());
+
+        return resultJson;
     }
 }
