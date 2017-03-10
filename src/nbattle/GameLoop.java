@@ -24,7 +24,7 @@ public class GameLoop implements Runnable {
         while (!gameOver && isRun) {
             try {
                 Thread.sleep(300);       // Задерживает поток. Необходимо для того, чтобы было наглядней видно, куда кто стреляет.
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 

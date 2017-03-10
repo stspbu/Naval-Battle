@@ -4,13 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import static nbattle.MainController.isRun;
+import static nbattle.MainController.lastScene;
 
 public class Main extends Application {
     /* NETWORK PARAMS */
-    public static String sNetId = "", sNetNick = "";
+    public static String sNetId = "", sNetNick = "", sNetEnemy = "";
+    public static MainController controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -18,15 +19,15 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("main.fxml"));
 
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        lastScene = new Scene(loader.load());
         primaryStage.setTitle(MainController.APP_TITLE);
-        primaryStage.setScene(new Scene(loader.load()));
+        primaryStage.setScene(lastScene);
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(e -> isRun = false);
 
         // Даём контроллеру доступ к главному приложению.
-        MainController controller = loader.getController();
+        controller = loader.getController();
     }
 
 
