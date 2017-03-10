@@ -49,12 +49,43 @@ public class GameLogic {
         }
     }
 
+    // Постановка корабля на поле network.
+    public static void setShipNet(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
+        if (isLeftSide) {
+            idFriend++;
+            if (idFriend > 9)
+                idFriend = 0;
+        } else {
+            idEnemy++;
+            if (idEnemy > 9)
+                idEnemy = 0;
+        }
+
+        if (horizontal) {
+            for (int i = 0; i < shipSize; i++) {
+                if (isLeftSide) {
+                    setCellShip(fieldFriend, xPos, yPos + i, i, shipSize, idFriend, horizontal);
+                } else {
+                    setCellShip(fieldEnemy, xPos, yPos + i, i, shipSize, idEnemy, horizontal);
+                }
+            }
+        } else {
+            for (int i = 0; i < shipSize; i++) {
+                if (isLeftSide) {
+                    setCellShip(fieldFriend, xPos + i, yPos, i, shipSize, idFriend, horizontal);
+                } else {
+                    setCellShip(fieldEnemy, xPos + i, yPos, i, shipSize, idEnemy, horizontal);
+                }
+            }
+        }
+    }
+
     // Постановка блока корабля на поле.
     private static void setCellShip(ArrayList<Cell> field, int xPos, int yPos, int i, int shipSize, int idShip, boolean horizontal) {
         getCell(field, xPos, yPos).type = 1;
         getCell(field, xPos, yPos).id = idShip;
+
         if (field.equals(fieldFriend)) {
-            //getCell(field, xPos, yPos).getStyleClass().add("cell-ship");
             if (shipSize == 1) {
                 getCell(field, xPos, yPos).bodyType = Cell.BodyType.Body;
                 if (horizontal)

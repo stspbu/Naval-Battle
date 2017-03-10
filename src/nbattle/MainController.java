@@ -152,25 +152,31 @@ public class MainController {
                 alertShow("Incorrect nickname!", "You should enter your nickname before creating a new game.", Alert.AlertType.ERROR);
 
                 return;
-            } else {
-                String resultJson = JsonUtils.parseUrl(MAIN_URL + "create.php", "&host=" + sNetNick);
-                sNetId = JsonUtils.parseCreateJson(resultJson);
+            }
 
-                if (sNetId != null) {
-                    stage = (Stage) lastScene.getWindow();
-                    root = FXMLLoader.load(getClass().getResource("create.fxml"));
+            String resultJson = JsonUtils.parseUrl(MAIN_URL + "create.php", "&host=" + sNetNick);
+            sNetId = JsonUtils.parseCreateJson(resultJson);
+
+            if (sNetId != null) {
+                stage = (Stage) lastScene.getWindow();
+                root = FXMLLoader.load(getClass().getResource("create.fxml"));
 
                     /* <--> id & snick are important <--> */
-                    Label info = (Label) (root.lookup("#infoFlow")).lookup("#netInfo");
-                    info.setText("Game id: #" + sNetId + ", name: " + sNetNick);
+                Label info = (Label) (root.lookup("#infoFlow")).lookup("#netInfo");
+                info.setText("Game id: #" + sNetId + ", name: " + sNetNick);
 
-                    Waiting waiting = new Waiting();
-                } else {
-                    alertShow("Oops! Something's wrong!", "Nickname's in use or connection problems occurred.", Alert.AlertType.ERROR);
-                    return;
-                }
+                Waiting waiting = new Waiting();
+            } else {
+                alertShow("Oops! Something's wrong!", "Nickname's in use or connection problems occurred.", Alert.AlertType.ERROR);
+                return;
             }
         } else if (e.getSource() == netFind) {
+            if (sNetNick.isEmpty()) {
+                alertShow("Incorrect nickname!", "You should enter your nickname before finding games.", Alert.AlertType.ERROR);
+
+                return;
+            }
+
             String resultJson = JsonUtils.parseUrl(MAIN_URL + "list.php", "");
             JSONArray gamesArray = JsonUtils.parseListJson(resultJson);
 

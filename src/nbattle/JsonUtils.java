@@ -203,10 +203,10 @@ public class JsonUtils {
             System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
             JSONArray ship = (JSONArray) gamesJsonObject.get("map" + idMap);
             for (int i = 0; i < ship.size(); i++) {
-                JSONObject gamesData = (JSONObject) ship.get(i);
-                matrix[i][0][0] = (int) gamesData.get(0);
-                matrix[i][1][0] = (int) gamesData.get(1);
-                matrix[i][2][0] = (int) gamesData.get(2);
+                JSONArray gamesData = (JSONArray) ship.get(i);
+                matrix[i][0][0] = Integer.parseInt(gamesData.get(0).toString());
+                matrix[i][1][0] = Integer.parseInt(gamesData.get(1).toString());
+                matrix[i][2][0] = Integer.parseInt(gamesData.get(2).toString());
             }
             return matrix;
 
