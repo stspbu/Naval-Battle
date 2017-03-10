@@ -264,11 +264,11 @@ public class MainController {
             randomPlacer(true);
             randomPlacer(false);
             String resultJson = JsonUtils.parseUrl(MAIN_URL + "connect.php", "&id=" +
-                    sNetId + "&map1=" + createDuringConnecting(coordinatesEnemy).toJSONString() + "&map2=" +
-                    createDuringConnecting(coordinatesFriend).toJSONString() + "&player=" + sNetNick);
+                    sNetId + "&map1=" + createDuringConnecting(coordinatesEnemy) + "&map2=" +
+                    createDuringConnecting(coordinatesFriend) + "&player=" + sNetNick);
             System.out.println(resultJson);
         });
-
+        
         row.getChildren().addAll(id, game, btn);
         table.getChildren().add(row);
     }

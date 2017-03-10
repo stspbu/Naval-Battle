@@ -182,21 +182,16 @@ public class JsonUtils {
         }
     }
 
-    public static JSONObject createDuringConnecting(int[][][] matrix) {
-        JSONArray ar = new JSONArray();
-        JSONArray dummy;
-        JSONObject resultJson = new JSONObject();
+    public static String createDuringConnecting(int[][][] matrix) {
+        String result = "";
+
         for (int i = 0; i < 10; i++) {
-            dummy = new JSONArray();
-            dummy.add(matrix[i][0][0]);
-            dummy.add(matrix[i][1][0]);
-            dummy.add(matrix[i][2][0]);
-            ar.add(dummy);
+            result += "[" + matrix[i][0][0] + ", " + matrix[i][1][0] + ", " + matrix[i][2][0] + "]";
+            if (i < 9)
+                result += ", ";
         }
+        System.out.println(result);
 
-        resultJson.put("map", ar);
-        System.out.println(resultJson.toJSONString());
-
-        return resultJson;
+        return "[" + result + "]";
     }
 }
