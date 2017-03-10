@@ -1,10 +1,10 @@
-.wait_text{
+.wait_text {
     -fx-text-fill: rgb(200, 200, 200);
     -fx-font-size: 24px;
     -fx-text-alignment: center;
 }
 
-.wait_img{
+.wait_img {
     -fx-background-image: url("../icons/icon_wait.gif");
     -fx-background-size: 256px;
     -fx-background-repeat: no-repeat;

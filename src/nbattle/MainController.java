@@ -185,8 +185,8 @@ public class MainController {
                 FlowPane table = new FlowPane();
                 table.getStyleClass().add("t_container");
 
-                for (int i = 0; i < gamesArray.size(); i++) {
-                    JSONObject gamesData = (JSONObject) gamesArray.get(i);
+                for (Object aGamesArray : gamesArray) {
+                    JSONObject gamesData = (JSONObject) aGamesArray;
                     addRowInto(table, gamesData.get("id").toString(), gamesData.get("host").toString());
                 }
 
@@ -268,7 +268,7 @@ public class MainController {
                     createDuringConnecting(coordinatesFriend) + "&player=" + sNetNick);
             System.out.println(resultJson);
         });
-        
+
         row.getChildren().addAll(id, game, btn);
         table.getChildren().add(row);
     }

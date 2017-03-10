@@ -4,9 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" styleClass="background" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0"
+            prefWidth="960.0" styleClass="background" stylesheets="@css/game.css"
+            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="nbattle.MainController">
     <children>
-        <GridPane fx:id="gameGrid" styleClass="grid" />
-        <Button fx:id="btnMain" layoutX="377.0" layoutY="537.0" mnemonicParsing="false" onAction="#buttonListener" stylesheets="@css/button.css" text="Main Menu" />
+        <GridPane fx:id="gameGrid" styleClass="grid"/>
+        <Button fx:id="btnMain" layoutX="377.0" layoutY="537.0" mnemonicParsing="false" onAction="#buttonListener"
+                stylesheets="@css/button.css" text="Main Menu"/>
     </children>
 </AnchorPane>

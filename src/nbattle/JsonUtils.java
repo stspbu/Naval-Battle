@@ -186,12 +186,33 @@ public class JsonUtils {
         String result = "";
 
         for (int i = 0; i < 10; i++) {
-            result += "[" + matrix[i][0][0] + ", " + matrix[i][1][0] + ", " + matrix[i][2][0] + "]";
+            result += "[\"" + matrix[i][0][0] + "\", \"" + matrix[i][1][0] + "\", \"" + matrix[i][2][0] + "\"]";
             if (i < 9)
                 result += ", ";
         }
         System.out.println(result);
 
         return "[" + result + "]";
+    }
+
+    public static int[][][] parseMatrices(String resultJson, int idMap) {
+        int[][][] matrix = new int[10][3][1];
+        try {
+            JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
+
+            System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
+            JSONArray ship = (JSONArray) gamesJsonObject.get("map" + idMap);
+            for (int i = 0; i < ship.size(); i++) {
+                JSONObject gamesData = (JSONObject) ship.get(i);
+                matrix[i][0][0] = (int) gamesData.get(0);
+                matrix[i][1][0] = (int) gamesData.get(1);
+                matrix[i][2][0] = (int) gamesData.get(2);
+            }
+            return matrix;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

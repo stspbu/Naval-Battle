@@ -6,17 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
-   <children>
-      <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="480.0" prefWidth="960.0" styleClass="t_layout" stylesheets="@css/table.css">
-         <children>
-            <ScrollPane fx:id="tableScroll" styleClass="t_scroll" stylesheets="@css/table.css" />
-         </children>
-      </FlowPane>
-      <Button fx:id="mainNet" layoutX="387.0" layoutY="530.0" mnemonicParsing="false" onAction="#buttonListener" text="Net Menu" />
-   </children>
-   <stylesheets>
-      <URL value="@css/background.css" />
-      <URL value="@css/button.css" />
-   </stylesheets>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0"
+            prefWidth="960.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.112"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+    <children>
+        <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="480.0" prefWidth="960.0"
+                  styleClass="t_layout" stylesheets="@css/table.css">
+            <children>
+                <ScrollPane fx:id="tableScroll" styleClass="t_scroll" stylesheets="@css/table.css"/>
+            </children>
+        </FlowPane>
+        <Button fx:id="mainNet" layoutX="387.0" layoutY="530.0" mnemonicParsing="false" onAction="#buttonListener"
+                text="Net Menu"/>
+    </children>
+    <stylesheets>
+        <URL value="@css/background.css"/>
+        <URL value="@css/button.css"/>
+    </stylesheets>
 </AnchorPane>

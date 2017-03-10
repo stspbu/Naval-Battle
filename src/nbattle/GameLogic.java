@@ -21,8 +21,7 @@ public class GameLogic {
             idFriend++;
             if (idFriend > 9)
                 idFriend = 0;
-        }
-        else {
+        } else {
             coordinatesEnemy[idEnemy][0][0] = xPos;
             coordinatesEnemy[idEnemy][1][0] = yPos;
             coordinatesEnemy[idEnemy][2][0] = (horizontal) ? 1 : 0;
