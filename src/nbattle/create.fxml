@@ -6,19 +6,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="960.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
-   <children>
-      <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="291.0" prefWidth="960.0" styleClass="wait_img" stylesheets="@css/wait.css" />
-      <FlowPane fx:id="infoFlow" alignment="CENTER" columnHalignment="CENTER" layoutX="1.0" layoutY="320.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="960.0">
-         <children>
-            <Label styleClass="wait_text" text="Waiting other players..." />
-            <Label fx:id="netInfo" prefHeight="35.0" styleClass="wait_text" text="Game info will be there" />
-         </children>
-      </FlowPane>
-      <Button fx:id="mainNet" layoutX="405.0" layoutY="530.0" mnemonicParsing="false" onAction="#buttonListener" text="Disconnect" />
-   </children>
-   <stylesheets>
-      <URL value="@css/wait.css" />
-      <URL value="@css/dark_design.css" />
-   </stylesheets>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0"
+            prefWidth="960.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.112"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+    <children>
+        <FlowPane alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="291.0" prefWidth="960.0"
+                  styleClass="wait_img" stylesheets="@css/wait.css"/>
+        <FlowPane fx:id="infoFlow" alignment="CENTER" columnHalignment="CENTER" layoutX="1.0" layoutY="320.0"
+                  orientation="VERTICAL" prefHeight="200.0" prefWidth="960.0">
+            <children>
+                <Label styleClass="wait_text" text="Waiting other players..."/>
+                <Label fx:id="netInfo" prefHeight="35.0" styleClass="wait_text" text="Game info will be there"/>
+            </children>
+        </FlowPane>
+        <Button fx:id="mainNet" layoutX="405.0" layoutY="530.0" mnemonicParsing="false" onAction="#buttonListener"
+                text="Disconnect"/>
+    </children>
+    <stylesheets>
+        <URL value="@css/wait.css"/>
+        <URL value="@css/dark_design.css"/>
+    </stylesheets>
 </AnchorPane>

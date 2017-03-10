@@ -1,5 +1,5 @@
 /* Almost main container */
-.t_layout{
+.t_layout {
     /* spacing for scollpane */
 
     -fx-padding: 64px;
@@ -7,7 +7,7 @@
 }
 
 /* ScrollPane -> table parent */
-.t_scroll{
+.t_scroll {
     -fx-border-width: 1px;
     -fx-border-color: black;
     -fx-max-height: 352px;
@@ -17,16 +17,17 @@
     -fx-unit-increment: 10;
     -fx-block-increment: 50;
 }
+
 /* FlowPane -> table */
-.t_container{
+.t_container {
 }
 
 /* HBox */
-.t_row{
+.t_row {
     -fx-background-color: #2F2F2F;
 }
 
-.t_id{
+.t_id {
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-pref-width: 100px;
@@ -36,7 +37,7 @@
     -fx-border-color: black;
 }
 
-.t_game{
+.t_game {
     -fx-text-fill: #eeeeee;
 
     -fx-font-size: 24px;
@@ -46,11 +47,11 @@
     -fx-padding: 0 0 0 15px;
 }
 
-.t_row:hover .t_id, .t_row:hover .t_game{
+.t_row:hover .t_id, .t_row:hover .t_game {
     -fx-background-color: black, rgba(255, 20, 20, .4);
 }
 
-.t_btn{
+.t_btn {
     -fx-border-insets: 0;
     -fx-border-width: 0;
     -fx-background-insets: 0;
@@ -71,7 +72,7 @@
     -fx-background-radius: 40px;*/
 }
 
-.t_btn:hover{
+.t_btn:hover {
     -fx-effect: none;
     -fx-background-color: black, rgba(0, 255, 0, .7);
 }

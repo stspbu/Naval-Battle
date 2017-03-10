@@ -60,7 +60,7 @@
 }
 
 .cell-empty, .cell-empty:focused {
-    -fx-background-image:  url("../images/water.jpg"), url("../images/empty.png");
+    -fx-background-image: url("../images/water.jpg"), url("../images/empty.png");
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 324px, 36px;
@@ -112,6 +112,6 @@
     -fx-rotate: 0;
 }
 
-.no-clickable:pressed, .no-clickable:focused{
+.no-clickable:pressed, .no-clickable:focused {
     -fx-effect: none;
 }

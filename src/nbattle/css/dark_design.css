@@ -1,12 +1,12 @@
-.background{
+.background {
     -fx-background-color: #262626;
 }
 
-.flow{
+.flow {
     -fx-vgap: 25px;
 }
 
-.button{
+.button {
     -fx-font-size: 24px;
     -fx-background-color: black;
 
@@ -17,6 +17,6 @@
     -fx-cursor: hand;
 }
 
-.button:hover{
+.button:hover {
     -fx-border-style: dashed;
 }

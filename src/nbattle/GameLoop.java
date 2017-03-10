@@ -32,7 +32,7 @@ public class GameLoop implements Runnable {
             if (!step && !gameOver && isRun) {
                 if (bot.getIsTargeted()) {
                     point = bot.nextDamage(fieldFriend);
-                }else {
+                } else {
                     point = bot.getCoord(fieldFriend);
                 }
 
