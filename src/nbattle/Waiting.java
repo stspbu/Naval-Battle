@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static nbattle.JsonUtils.parseMatrices;
-import static nbattle.Main.sNetId;
 import static nbattle.MainController.MAIN_URL;
 import static nbattle.MainController.createStage;
 import static nbattle.GameLogic.*;
+import static nbattle.Main.*;
+
 
 public class Waiting implements Runnable {
     private final int DELAY = 750;
@@ -44,6 +45,8 @@ public class Waiting implements Runnable {
         Platform.runLater(() -> {
             try {
                 createStage();
+                isHost = true;
+                isOnline = true;
 
                 coordinatesFriend = parseMatrices(resultJsonWait, 1);
                 coordinatesEnemy = parseMatrices(resultJsonWait, 2);
@@ -63,5 +66,7 @@ public class Waiting implements Runnable {
                 ex.printStackTrace();
             }
         });
+
+        new Processing();
     }
 }

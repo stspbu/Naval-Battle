@@ -5,7 +5,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,13 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 
-import static nbattle.Main.sNetNick;
 
 public class JsonUtils {
     private static final String HASH = "BN45CJLI149XCdp434xhzzzLKxCKnBP1432lkU";
 
+    @Nullable
     public static String parseUrl(String sUrl, String sParams) {
         // Создаем URL из строки.
         URL url = JsonUtils.createUrl(sUrl);
@@ -61,6 +62,7 @@ public class JsonUtils {
 
 
     // Парсим некоторые данные об играх.
+    @Nullable
     public static JSONArray parseListJson(String resultJson) {
         try {
             // Конвертируем строку с Json в JSONObject для дальнейшего его парсинга.
@@ -85,6 +87,7 @@ public class JsonUtils {
     }
 
     // Парсим некоторые данные создании игры.
+    @Nullable
     public static String parseCreateJson(String resultJson) {
         try {
             // Конвертируем строку с Json в JSONObject для дальнейшего его парсинга.
@@ -173,6 +176,7 @@ public class JsonUtils {
     }
 
     // Создаем объект URL из указанной в параметре строки.
+    @Nullable
     public static URL createUrl(String link) {
         try {
             return new URL(link);
@@ -195,6 +199,7 @@ public class JsonUtils {
         return "[" + result + "]";
     }
 
+    @Nullable
     public static int[][][] parseMatrices(String resultJson, int idMap) {
         int[][][] matrix = new int[10][3][1];
         try {
@@ -214,5 +219,66 @@ public class JsonUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean parseUpdateJson(String resultJson) {
+        try {
+            JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
+            System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
+
+            if (gamesJsonObject.get("info") == null) {
+                return true;
+            }
+
+            System.out.println("Ошибка: " + gamesJsonObject.get("info"));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean parseMoverJson(String resultJson) {
+        try {
+            JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
+            System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
+
+            if (gamesJsonObject.get("info") == null) {
+                System.out.println("Кто ходит? " + gamesJsonObject.get("mover"));
+                return gamesJsonObject.get("mover").equals("1");
+            }
+
+            System.out.println("Ошибка: " + gamesJsonObject.get("info"));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static Point parseCoordJson(String resultJson) {
+        Point point = new Point();
+        try {
+            JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
+            System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
+
+            if (gamesJsonObject.get("info") == null) {
+                String coord = gamesJsonObject.get("coord").toString(); //"5 , 6"
+                coord = coord.trim();
+                String[] coordNew = coord.split(",");
+                point.x = Integer.parseInt(coordNew[0]);
+                point.y = Integer.parseInt(coordNew[1]);
+                return point;
+            }
+
+            System.out.println("Ошибка: " + gamesJsonObject.get("info"));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return point;
     }
 }
