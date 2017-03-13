@@ -18,8 +18,6 @@ public class Processing implements Runnable {
 
     @Override
     public void run() {
-        String resultJson = JsonUtils.parseUrl(MAIN_URL + "mover.php", "&id=" + sNetId);
-        step = JsonUtils.parseMoverJson(resultJson) == isHost;
         Point point;
         Point last = new Point(-1, -1);
         while (isOnline) {
