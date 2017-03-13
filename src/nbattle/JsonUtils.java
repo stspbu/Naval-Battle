@@ -258,6 +258,7 @@ public class JsonUtils {
         return false;
     }
 
+    @Nullable
     public static Point parseCoordJson(String resultJson) {
         Point point = new Point();
         try {
@@ -279,6 +280,6 @@ public class JsonUtils {
             e.printStackTrace();
         }
 
-        return point;
+        return null;
     }
 }
