@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 import static nbattle.MainController.isRun;
 import static nbattle.MainController.lastScene;
 
+
 public class Main extends Application {
     /* NETWORK PARAMS */
+    public static boolean isHost, isOnline;
     public static String sNetId = "", sNetNick = "", sNetEnemy = "";
     public static MainController controller;
 

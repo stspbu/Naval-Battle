@@ -1,34 +1,29 @@
 package nbattle;
 
 import com.sun.istack.internal.Nullable;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static nbattle.JsonUtils.createDuringConnecting;
 import static nbattle.Main.*;
 import static nbattle.GameLogic.*;
 
+
 public class MainController {
     private static final int MAX_LENGTH = 32; // for online nickname
 
+    public static final int DELAY = 350;
     private static final int MAX_CELLS = 10;
     public static final String APP_TITLE = "Naval Battle";
     public static final String MAIN_URL = "http://f0123592.xsph.ru/backend/";
@@ -61,12 +56,9 @@ public class MainController {
         Parent root;
 
         if (e.getSource() == mainStart) {
-            fieldFriend.clear();
-            fieldEnemy.clear();
-            step = true;
-            gameOver = false;
-            countDeathFriend = 0;
-            countDeathEnemy = 0;
+            isOnline = false;
+            isHost = true;
+            resetGlobals();
 
             stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("game.fxml"));
@@ -218,6 +210,13 @@ public class MainController {
         System.out.println("Clicked: " + cell.x + ":" + cell.y);
         if (step && !gameOver) {
             checkField(cell.x, cell.y, step, fieldEnemy);
+
+            if (isOnline) {
+                JsonUtils.parseUrl(MAIN_URL + "update.php", "&id=" + sNetId +
+                        "&coord=" + cell.x + "," + cell.y + "&mover=" + (step == isHost ? "1" : "0"));
+                // true of false: JsonUtils.parseListJson(resultJson);
+            }
+
             if (isWin(fieldEnemy))
                 for (Cell cellX : fieldEnemy) {
                     cellX.getStyleClass().add("cell-damaged");
@@ -264,15 +263,21 @@ public class MainController {
 
             try {
                 createStage();
+                isHost = false;
+                isOnline = true;
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
             randomPlacer(true);
             randomPlacer(false);
             String resultJson = JsonUtils.parseUrl(MAIN_URL + "connect.php", "&id=" +
                     sNetId + "&map1=" + createDuringConnecting(coordinatesEnemy) + "&map2=" +
                     createDuringConnecting(coordinatesFriend) + "&player=" + sNetNick);
+
+            step = JsonUtils.parseMoverJson(resultJson) == isHost;
             System.out.println(resultJson);
+            new Processing();
         });
 
         row.getChildren().addAll(id, game, btn);
@@ -292,12 +297,7 @@ public class MainController {
         Stage stage;
         Parent root;
 
-        fieldFriend.clear();
-        fieldEnemy.clear();
-        step = true;
-        gameOver = false;
-        countDeathFriend = 0;
-        countDeathEnemy = 0;
+        resetGlobals();
 
         stage = (Stage) lastScene.getWindow();
         root = FXMLLoader.load(controller.getClass().getResource("game.fxml"));
@@ -362,5 +362,14 @@ public class MainController {
         lastScene = new Scene(root);
         stage.setScene(lastScene);
         stage.show();
+    }
+
+    private static void resetGlobals() {
+        fieldFriend.clear();
+        fieldEnemy.clear();
+        step = false;
+        gameOver = false;
+        countDeathFriend = 0;
+        countDeathEnemy = 0;
     }
 }

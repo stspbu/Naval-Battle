@@ -6,6 +6,7 @@ import java.util.*;
 import static nbattle.MainController.getCell;
 import static nbattle.GameLogic.isDead;
 
+
 public class Bot {
     private int x = 0, y = 0, firstX = 0, firstY = 0, lastX = 0, lastY = 0;
     private Point point = new Point(0, 0);
