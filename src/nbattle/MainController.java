@@ -57,7 +57,7 @@ public class MainController {
 
         if (e.getSource() == mainStart) {
             isOnline = false;
-            isHost = true;
+            //isHost = true;
             resetGlobals();
 
             stage = (Stage) lastScene.getWindow();
@@ -157,6 +157,7 @@ public class MainController {
                 Label info = (Label) (root.lookup("#infoFlow")).lookup("#netInfo");
                 info.setText("Game id: #" + sNetId + ", name: " + sNetNick);
 
+                //isHost = true;
                 Waiting waiting = new Waiting();
             } else {
                 alertShow("Oops! Something's wrong!", "Nickname's in use or connection problems occurred.", Alert.AlertType.ERROR);

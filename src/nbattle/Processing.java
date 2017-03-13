@@ -1,5 +1,6 @@
 package nbattle;
 
+import javafx.application.Platform;
 import java.awt.*;
 
 import static nbattle.GameLogic.checkField;
@@ -30,9 +31,12 @@ public class Processing implements Runnable {
 
             String resultCoordJson = JsonUtils.parseUrl(MAIN_URL + "coord.php", "&id=" + sNetId);
             point = JsonUtils.parseCoordJson(resultCoordJson);
-            if (point != last) {
+            if (point != last && !step && point != null) {
                 last = point;
-                checkField(point.x, point.y, step, fieldFriend);
+                final Point p = point;
+                Platform.runLater(() -> {
+                    checkField(p.x, p.y, step, fieldFriend);
+                });
             }
         }
     }
