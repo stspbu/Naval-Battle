@@ -271,6 +271,7 @@ public class JsonUtils {
                 String[] coordNew = coord.split(",");
                 point.x = Integer.parseInt(coordNew[0]);
                 point.y = Integer.parseInt(coordNew[1]);
+
                 return point;
             }
 

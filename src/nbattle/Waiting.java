@@ -62,6 +62,9 @@ public class Waiting implements Runnable {
                     setShipNet(k, coordinatesFriend[i][2][0] == 1 ? true : false, coordinatesFriend[i][0][0], coordinatesFriend[i][1][0], true);
                     setShipNet(k, coordinatesEnemy[i][2][0] == 1 ? true : false, coordinatesEnemy[i][0][0], coordinatesEnemy[i][1][0], false);
                 }
+
+                String resultJson = JsonUtils.parseUrl(MAIN_URL + "mover.php", "&id=" + sNetId);
+                step = JsonUtils.parseMoverJson(resultJson) == isHost;
                 new Processing();
             } catch (IOException ex) {
                 ex.printStackTrace();
