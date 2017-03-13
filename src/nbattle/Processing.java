@@ -27,7 +27,7 @@ public class Processing implements Runnable {
                 e.printStackTrace();
             }
 
-            String resultCoordJson = JsonUtils.parseUrl(MAIN_URL + "coord.php", "&id=" + sNetId);
+            String resultCoordJson = JsonUtils.parseUrl(MAIN_URL + "coord.php", "&id=" + sNetId + "&who=" + (isHost ? "1" : "0"));
             point = JsonUtils.parseCoordJson(resultCoordJson);
             if (point != last && !step && point != null) {
                 last = point;

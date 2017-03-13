@@ -2,6 +2,8 @@ package nbattle;
 
 import java.util.*;
 
+import static nbattle.Main.isHost;
+import static nbattle.Main.sNetId;
 import static nbattle.MainController.*;
 
 

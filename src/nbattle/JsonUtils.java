@@ -5,7 +5,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import java.awt.*;
 import java.io.BufferedReader;

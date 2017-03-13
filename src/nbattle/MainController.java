@@ -214,7 +214,7 @@ public class MainController {
 
             if (isOnline) {
                 JsonUtils.parseUrl(MAIN_URL + "update.php", "&id=" + sNetId +
-                        "&coord=" + cell.x + "," + cell.y + "&mover=" + (step == isHost ? "1" : "0"));
+                        "&coord=" + cell.x + "," + cell.y + "&who=" + (isHost ? "1" : "0"));
                 // true of false: JsonUtils.parseListJson(resultJson);
             }
 
@@ -261,6 +261,11 @@ public class MainController {
             TableCell tc = (TableCell) event.getSource();
             sNetId = tc.id;
             sNetEnemy = tc.game;
+
+            if (sNetNick.equals(sNetEnemy)) {
+                alertShow("Incorrect nickname", "Your nickname is already in-use!", Alert.AlertType.WARNING);
+                return;
+            }
 
             try {
                 createStage();

@@ -115,3 +115,48 @@
 .no-clickable:pressed, .no-clickable:focused {
     -fx-effect: none;
 }
+
+.net-nicks{
+    -fx-padding: 0 0 0 64px;
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-effect: dropshadow(gaussian, black, 1, 1.0, 0, 0);
+}
+
+.right-align{
+    -fx-padding: 0 64px 0 0;
+    -fx-alignment: center-right;
+}
+
+.flow-stat{
+    -fx-pref-width: 250px;
+    -fx-pref-height: 150px;
+    -fx-padding: 0 0 0 20px;
+}
+
+.ship-stat-head{
+    -fx-background-image: url("../images/head.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+}
+
+.ship-stat-body{
+    -fx-background-image: url("../images/body.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+    -fx-rotate: 180deg;
+}
+
+.ship-stat-tail{
+    -fx-background-image: url("../images/tail.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+    -fx-background-color: transparent;
+}
+
+.last-one{
+    -fx-padding: 0 32px 0 0;
+    -fx-background-position: right;
+}
