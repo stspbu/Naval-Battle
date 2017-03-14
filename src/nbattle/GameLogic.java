@@ -1,9 +1,9 @@
 package nbattle;
 
+import javafx.scene.control.Button;
+
 import java.util.*;
 
-import static nbattle.Main.isHost;
-import static nbattle.Main.sNetId;
 import static nbattle.MainController.*;
 
 
@@ -13,6 +13,9 @@ public class GameLogic {
     public static int countDeathFriend = 0, countDeathEnemy = 0;
     public static int[][][] coordinatesEnemy = new int[10][3][1];
     public static int[][][] coordinatesFriend = new int[10][3][1];
+    public static int[] countShipFriend = new int[4];
+    public static int[] countShipEnemy = new int[4];
+    private static Button button1, button2, button3, button4;
 
     // Постановка корабля на поле.
     private static void setShip(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
@@ -230,8 +233,10 @@ public class GameLogic {
                     countDeathEnemy++;
                 else
                     countDeathFriend++;
+                int counter = 0;
                 for (Cell cell : field) {
                     if (cell.id == cellN.id) {
+                        counter++;
                         getCell(field, cell.x, cell.y).type = 4;
                         getCell(field, cell.x, cell.y).getStyleClass().add("cell-killed");
                         int dy1 = cell.y - 1, dy2 = cell.y + 1;
@@ -280,6 +285,36 @@ public class GameLogic {
                 }
                 if (countDeathEnemy == 10 || countDeathFriend == 10)
                     gameOver = true;
+                switch (counter) {
+                    case 1:
+                        if (!step)
+                            countShipFriend[3]--;
+                        else
+                            countShipEnemy[3]--;
+                        break;
+                    case 2:
+                        if (!step)
+                            countShipFriend[2]--;
+                        else
+                            countShipEnemy[2]--;
+                        break;
+                    case 3:
+                        if (!step)
+                            countShipFriend[1]--;
+                        else
+                            countShipEnemy[1]--;
+                        break;
+                    case 4:
+                        if (!step)
+                            countShipFriend[0]--;
+                        else
+                            countShipEnemy[0]--;
+                        break;
+                }
+                if (!step)
+                    changeCountShip(true);
+                else
+                    changeCountShip(false);
             } else {
                 int dy1 = dy - 1, dy2 = dy + 1;
                 int dx1 = dx - 1, dx2 = dx + 1;
@@ -314,7 +349,7 @@ public class GameLogic {
         return true;
     }
 
-    public static void changeStepDesign(){
+    public static void changeStepDesign() {
         if (!step) {
             for (Cell cell : fieldEnemy) {
                 cell.getStyleClass().add("no-clickable");
@@ -322,6 +357,8 @@ public class GameLogic {
 
             lastScene.lookup("#enemyNick").getStyleClass().add("move-selector");
             lastScene.lookup("#friendNick").getStyleClass().remove("move-selector");
+
+            changeCountShip(false);
         } else {
             for (Cell cell : fieldEnemy) {
                 cell.getStyleClass().remove("no-clickable");
@@ -329,6 +366,32 @@ public class GameLogic {
 
             lastScene.lookup("#friendNick").getStyleClass().add("move-selector");
             lastScene.lookup("#enemyNick").getStyleClass().remove("move-selector");
+
+            changeCountShip(true);
+        }
+    }
+
+    public static void changeCountShip(boolean isLeft) {
+        if (isLeft) {
+            button4 = (Button) lastScene.lookup("#left4");
+            button3 = (Button) lastScene.lookup("#left3");
+            button2 = (Button) lastScene.lookup("#left2");
+            button1 = (Button) lastScene.lookup("#left1");
+
+            button4.setText(countShipFriend[0] + "");
+            button3.setText(countShipFriend[1] + "");
+            button2.setText(countShipFriend[2] + "");
+            button1.setText(countShipFriend[3] + "");
+        } else {
+            button4 = (Button) lastScene.lookup("#right4");
+            button3 = (Button) lastScene.lookup("#right3");
+            button2 = (Button) lastScene.lookup("#right2");
+            button1 = (Button) lastScene.lookup("#right1");
+
+            button4.setText(countShipEnemy[0] + "");
+            button3.setText(countShipEnemy[1] + "");
+            button2.setText(countShipEnemy[2] + "");
+            button1.setText(countShipEnemy[3] + "");
         }
     }
 }

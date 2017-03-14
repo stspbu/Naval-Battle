@@ -1,6 +1,7 @@
 package nbattle;
 
 import javafx.application.Platform;
+
 import java.awt.*;
 
 import static nbattle.GameLogic.checkField;

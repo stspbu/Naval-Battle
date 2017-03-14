@@ -1,6 +1,7 @@
 package nbattle;
 
 import com.sun.istack.internal.Nullable;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,6 +126,10 @@ public class MainController {
             }
             randomPlacer(true);
             randomPlacer(false);
+            Platform.runLater(() -> {
+                changeCountShip(true);
+                changeCountShip(false);
+            });
             new GameLoop();
         } else if (e.getSource() == mainNet) {
             stage = (Stage) lastScene.getWindow();
@@ -132,7 +137,7 @@ public class MainController {
 
             TextField local_netNick = (TextField) root.lookup("#netNick");
 
-            if(!sNetId.isEmpty()){
+            if (!sNetId.isEmpty()) {
                 // trying to disable the game
                 String resultJson = JsonUtils.parseUrl(MAIN_URL + "inactive.php", "&id=" + sNetId);
                 System.out.println(resultJson);
@@ -213,7 +218,7 @@ public class MainController {
             isOnline = false;
             gameOver = true;
 
-            if(!sNetId.isEmpty()){
+            if (!sNetId.isEmpty()) {
                 // trying to disable the game
                 String resultJson = JsonUtils.parseUrl(MAIN_URL + "inactive.php", "&id=" + sNetId);
                 System.out.println(resultJson);
@@ -234,25 +239,26 @@ public class MainController {
     private static void handleClick(Cell cell) {
         System.out.println("Clicked: " + cell.x + ":" + cell.y);
         if (step && !gameOver) {
-            checkField(cell.x, cell.y, step, fieldEnemy);
+            Platform.runLater(() -> {
+                checkField(cell.x, cell.y, step, fieldEnemy);
 
-            if (isOnline) {
-                JsonUtils.parseUrl(MAIN_URL + "update.php", "&id=" + sNetId +
-                        "&coord=" + cell.x + "," + cell.y + "&who=" + (isHost ? "1" : "0"));
-                // true of false: JsonUtils.parseListJson(resultJson);
-            }
-
-            if (isWin(fieldEnemy))
-                for (Cell cellX : fieldEnemy) {
-                    cellX.getStyleClass().add("cell-damaged");
+                if (isOnline) {
+                    JsonUtils.parseUrl(MAIN_URL + "update.php", "&id=" + sNetId +
+                            "&coord=" + cell.x + "," + cell.y + "&who=" + (isHost ? "1" : "0"));
+                    // true of false: JsonUtils.parseListJson(resultJson);
                 }
+
+                if (isWin(fieldEnemy))
+                    for (Cell cellX : fieldEnemy) {
+                        cellX.getStyleClass().add("cell-damaged");
+                    }
+            });
         }
     }
 
     @Nullable
     public static Cell getCell(ArrayList<Cell> field, int x, int y) {
         /* sometimes really produce null pointer exception */
-
         for (Cell cell : field)
             if (cell.x == x && cell.y == y)
                 return cell;
@@ -289,7 +295,7 @@ public class MainController {
             if (sNetNick.equals(sNetEnemy)) {
                 alertShow("Incorrect nickname", "Your nickname is already in-use!", Alert.AlertType.WARNING);
                 return;
-            }else if(!JsonUtils.parseNoParamJson(JsonUtils.parseUrl(MAIN_URL + "isactive.php", "&id=" + sNetId))){
+            } else if (!JsonUtils.parseNoParamJson(JsonUtils.parseUrl(MAIN_URL + "isactive.php", "&id=" + sNetId))) {
                 alertShow("Invalid game id", "It seems that this game is already started!", Alert.AlertType.WARNING);
                 return;
             }
@@ -312,7 +318,11 @@ public class MainController {
             // here was a bug with 1 == false, don't know wtf java's doing, the same nicks were not the crash reason(
             step = JsonUtils.parseMoverJson(resultJson) == isHost;
 
-            changeStepDesign();
+            Platform.runLater(() -> {
+                changeStepDesign();
+                changeCountShip(true);
+                changeCountShip(false);
+            });
             new Processing();
         });
 
@@ -411,5 +421,9 @@ public class MainController {
         gameOver = false;
         countDeathFriend = 0;
         countDeathEnemy = 0;
+        for (int i = 0; i < 4; i++) {
+            countShipFriend[i] = i + 1;
+            countShipEnemy[i] = i + 1;
+        }
     }
 }

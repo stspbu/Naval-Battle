@@ -116,30 +116,30 @@
     -fx-effect: innershadow(gaussian, rgba(255, 0, 0, 1), 15, 0, 0, 1);
 }
 
-.net-nicks{
+.net-nicks {
     -fx-padding: 0 0 0 64px;
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-effect: dropshadow(gaussian, black, 1, 1.0, 0, 0);
 }
 
-.right-align{
+.right-align {
     -fx-padding: 0 64px 0 0;
     -fx-alignment: center-right;
 }
 
-.flow-stat, .flow-stat-right{
+.flow-stat, .flow-stat-right {
     -fx-pref-width: 250px;
     -fx-pref-height: 150px;
     -fx-padding: 0 0 0 20px;
     -fx-cursor: default;
 }
 
-.flow-stat-right{
+.flow-stat-right {
     -fx-padding: 0 20px 0 0;
 }
 
-.ship-stat-head{
+.ship-stat-head {
     -fx-background-image: url("../images/head.png");
     -fx-background-position: center;
     -fx-background-size: cover;
@@ -147,7 +147,7 @@
     -fx-cursor: default;
 }
 
-.ship-stat-body{
+.ship-stat-body {
     -fx-background-image: url("../images/body.png");
     -fx-background-position: center;
     -fx-background-size: cover;
@@ -156,7 +156,7 @@
     -fx-cursor: default;
 }
 
-.ship-stat-tail{
+.ship-stat-tail {
     -fx-background-image: url("../images/tail.png");
     -fx-background-position: center;
     -fx-background-size: cover;
@@ -164,22 +164,22 @@
     -fx-cursor: default;
 }
 
-.last-gap{
+.last-gap {
     -fx-hgap: 7px;
 }
 
-.rotate-180{
+.rotate-180 {
     -fx-rotate: 180deg;
 }
 
 .ship-stat-head:hover, ship-stat-head:pressed, .ship-stat-head:focused,
 .ship-stat-body:hover, ship-stat-body:pressed, .ship-stat-body:focused,
-.ship-stat-tail:hover, ship-stat-tail:pressed, .ship-stat-tail:focused{
+.ship-stat-tail:hover, ship-stat-tail:pressed, .ship-stat-tail:focused {
     -fx-effect: none;
     -fx-cursor: default;
     -fx-background-color: transparent;
 }
 
-.move-selector{
+.move-selector {
     -fx-text-fill: lawngreen;
 }

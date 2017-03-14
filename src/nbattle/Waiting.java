@@ -61,11 +61,13 @@ public class Waiting implements Runnable {
                     else if (i == 6)
                         k--;
                     setShipNet(k, coordinatesFriend[i][2][0] == 1, coordinatesFriend[i][0][0], coordinatesFriend[i][1][0], true);
-                    setShipNet(k, coordinatesEnemy[i][2][0] == 1 , coordinatesEnemy[i][0][0], coordinatesEnemy[i][1][0], false);
+                    setShipNet(k, coordinatesEnemy[i][2][0] == 1, coordinatesEnemy[i][0][0], coordinatesEnemy[i][1][0], false);
                 }
 
                 step = (list.get(1).equals("1")) == isHost;
                 changeStepDesign();
+                changeCountShip(true);
+                changeCountShip(false);
                 new Processing();
             } catch (IOException ex) {
                 ex.printStackTrace();

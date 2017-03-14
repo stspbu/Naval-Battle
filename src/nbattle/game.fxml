@@ -9,215 +9,223 @@
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="960.0" styleClass="background" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nbattle.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0"
+            prefWidth="960.0" styleClass="background" stylesheets="@css/game.css"
+            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="nbattle.MainController">
     <children>
-        <GridPane fx:id="gameGrid" styleClass="grid" />
-        <Button fx:id="btnMain" layoutX="377.0" layoutY="565.0" mnemonicParsing="false" onAction="#buttonListener" stylesheets="@css/button.css" text="Main Menu" />
-      <Label fx:id="enemyNick" layoutX="480.0" layoutY="480.0" prefHeight="17.0" prefWidth="480.0" text="-">
-         <styleClass>
-            <String fx:value="net-nicks" />
-            <String fx:value="right-align" />
-         </styleClass></Label>
-      <Label fx:id="friendNick" layoutY="480.0" prefHeight="17.0" prefWidth="480.0" styleClass="net-nicks" text="-" />
-      <AnchorPane layoutX="0" layoutY="520.0" prefHeight="255.0" prefWidth="250.0">
-         <children>
-            <FlowPane prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
-               <children>
-                  <Button fx:id="left4" mnemonicParsing="false" styleClass="g_info" text="0" />
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-tail" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-body" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-body" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="ship-stat-head" />
-                        <String fx:value="g_ship" />
-                     </styleClass>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop color="BLACK" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
-                  </Button>
-               </children>
-            </FlowPane>
-            <FlowPane layoutY="35.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
-               <children>
-                  <Button fx:id="left3" mnemonicParsing="false" styleClass="g_info" text="0" />
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-tail" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-body" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-head" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </FlowPane>
-            <FlowPane layoutY="70.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
-               <children>
-                  <Button fx:id="left2" mnemonicParsing="false" styleClass="g_info" text="0" />
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-tail" />
-                     </styleClass>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-head" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </FlowPane>
-            <FlowPane layoutY="105.0" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="left1" mnemonicParsing="false" styleClass="g_info" text="0" />
-                  <Button mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="g_ship" />
-                        <String fx:value="ship-stat-body" />
-                     </styleClass>
-                  </Button>
-               </children>
-               <styleClass>
-                  <String fx:value="flow-stat" />
-                  <String fx:value="last-gap" />
-               </styleClass>
-            </FlowPane>
-         </children>
-      </AnchorPane>
+        <GridPane fx:id="gameGrid" styleClass="grid"/>
+        <Button fx:id="btnMain" layoutX="377.0" layoutY="565.0" mnemonicParsing="false" onAction="#buttonListener"
+                stylesheets="@css/button.css" text="Main Menu"/>
+        <Label fx:id="enemyNick" layoutX="480.0" layoutY="480.0" prefHeight="17.0" prefWidth="480.0" text="-">
+            <styleClass>
+                <String fx:value="net-nicks"/>
+                <String fx:value="right-align"/>
+            </styleClass>
+        </Label>
+        <Label fx:id="friendNick" layoutY="480.0" prefHeight="17.0" prefWidth="480.0" styleClass="net-nicks" text="-"/>
+        <AnchorPane layoutX="0" layoutY="520.0" prefHeight="255.0" prefWidth="250.0">
+            <children>
+                <FlowPane prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
+                    <children>
+                        <Button fx:id="left4" mnemonicParsing="false" styleClass="g_info" text="0"/>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="ship-stat-head"/>
+                                <String fx:value="g_ship"/>
+                            </styleClass>
+                            <textFill>
+                                <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                    <stops>
+                                        <Stop color="BLACK"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                        </Button>
+                    </children>
+                </FlowPane>
+                <FlowPane layoutY="35.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
+                    <children>
+                        <Button fx:id="left3" mnemonicParsing="false" styleClass="g_info" text="0"/>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-head"/>
+                            </styleClass>
+                        </Button>
+                    </children>
+                </FlowPane>
+                <FlowPane layoutY="70.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
+                    <children>
+                        <Button fx:id="left2" mnemonicParsing="false" styleClass="g_info" text="0"/>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                            </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-head"/>
+                            </styleClass>
+                        </Button>
+                    </children>
+                </FlowPane>
+                <FlowPane layoutY="105.0" prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="left1" mnemonicParsing="false" styleClass="g_info" text="0"/>
+                        <Button mnemonicParsing="false">
+                            <styleClass>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                            </styleClass>
+                        </Button>
+                    </children>
+                    <styleClass>
+                        <String fx:value="flow-stat"/>
+                        <String fx:value="last-gap"/>
+                    </styleClass>
+                </FlowPane>
+            </children>
+        </AnchorPane>
 
-        <AnchorPane layoutX="710.0" layoutY="520.0" prefHeight="255.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+        <AnchorPane layoutX="710.0" layoutY="520.0" prefHeight="255.0" prefWidth="250.0"
+                    xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
             <children>
                 <FlowPane alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="350.0" styleClass="flow-stat-right">
                     <children>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="ship-stat-head" />
-                                <String fx:value="g_ship" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="ship-stat-head"/>
+                                <String fx:value="g_ship"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                             <textFill>
                                 <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                                     <stops>
-                                        <Stop color="BLACK" />
-                                        <Stop color="WHITE" offset="1.0" />
+                                        <Stop color="BLACK"/>
+                                        <Stop color="WHITE" offset="1.0"/>
                                     </stops>
                                 </RadialGradient>
                             </textFill>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-body" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-body" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-tail" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
-                        <Button fx:id="right4" mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right4" mnemonicParsing="false" styleClass="g_info" text="0"/>
                     </children>
                 </FlowPane>
-                <FlowPane alignment="TOP_RIGHT" layoutY="35.0" prefHeight="50.0" prefWidth="350.0" styleClass="flow-stat-right">
+                <FlowPane alignment="TOP_RIGHT" layoutY="35.0" prefHeight="50.0" prefWidth="350.0"
+                          styleClass="flow-stat-right">
                     <children>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-head" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-head"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-body" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-tail" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
-                        <Button fx:id="right3" mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right3" mnemonicParsing="false" styleClass="g_info" text="0"/>
                     </children>
                 </FlowPane>
-                <FlowPane alignment="TOP_RIGHT" layoutY="70.0" prefHeight="50.0" prefWidth="50.0" styleClass="flow-stat-right">
+                <FlowPane alignment="TOP_RIGHT" layoutY="70.0" prefHeight="50.0" prefWidth="50.0"
+                          styleClass="flow-stat-right">
                     <children>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-head" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-head"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-tail" />
-                        <String fx:value="rotate-180" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-tail"/>
+                                <String fx:value="rotate-180"/>
                             </styleClass>
                         </Button>
-                        <Button fx:id="right2" mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right2" mnemonicParsing="false" styleClass="g_info" text="0"/>
                     </children>
                 </FlowPane>
                 <FlowPane alignment="TOP_RIGHT" layoutY="105.0" prefHeight="50.0" prefWidth="350.0">
                     <children>
                         <Button mnemonicParsing="false">
                             <styleClass>
-                                <String fx:value="g_ship" />
-                                <String fx:value="ship-stat-body" />
+                                <String fx:value="g_ship"/>
+                                <String fx:value="ship-stat-body"/>
                             </styleClass>
                         </Button>
-                        <Button fx:id="right1" mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right1" mnemonicParsing="false" styleClass="g_info" text="0"/>
                     </children>
-               <styleClass>
-                  <String fx:value="flow-stat-right" />
-                  <String fx:value="last-gap" />
-               </styleClass>
+                    <styleClass>
+                        <String fx:value="flow-stat-right"/>
+                        <String fx:value="last-gap"/>
+                    </styleClass>
                 </FlowPane>
             </children>
         </AnchorPane>
