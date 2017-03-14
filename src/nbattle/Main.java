@@ -22,6 +22,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("main.fxml"));
 
         lastScene = new Scene(loader.load());
+        primaryStage.setResizable(false);
         primaryStage.setTitle(MainController.APP_TITLE);
         primaryStage.setScene(lastScene);
         primaryStage.show();
