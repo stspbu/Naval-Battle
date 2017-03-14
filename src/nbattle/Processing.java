@@ -20,7 +20,7 @@ public class Processing implements Runnable {
     public void run() {
         Point point;
         Point last = new Point(-1, -1);
-        while (isOnline) {
+        while (isOnline && isRun) {
             try {
                 Thread.sleep(DELAY);
             } catch (InterruptedException e) {

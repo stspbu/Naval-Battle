@@ -112,8 +112,8 @@
     -fx-rotate: 0;
 }
 
-.no-clickable:pressed, .no-clickable:focused {
-    -fx-effect: none;
+.no-clickable:pressed {
+    -fx-effect: innershadow(gaussian, rgba(255, 0, 0, 1), 15, 0, 0, 1);
 }
 
 .net-nicks{
@@ -128,10 +128,15 @@
     -fx-alignment: center-right;
 }
 
-.flow-stat{
+.flow-stat, .flow-stat-right{
     -fx-pref-width: 250px;
     -fx-pref-height: 150px;
     -fx-padding: 0 0 0 20px;
+    -fx-cursor: default;
+}
+
+.flow-stat-right{
+    -fx-padding: 0 20px 0 0;
 }
 
 .ship-stat-head{
@@ -139,6 +144,7 @@
     -fx-background-position: center;
     -fx-background-size: cover;
     -fx-background-color: transparent;
+    -fx-cursor: default;
 }
 
 .ship-stat-body{
@@ -147,6 +153,7 @@
     -fx-background-size: cover;
     -fx-background-color: transparent;
     -fx-rotate: 180deg;
+    -fx-cursor: default;
 }
 
 .ship-stat-tail{
@@ -154,9 +161,25 @@
     -fx-background-position: center;
     -fx-background-size: cover;
     -fx-background-color: transparent;
+    -fx-cursor: default;
 }
 
-.last-one{
-    -fx-padding: 0 32px 0 0;
-    -fx-background-position: right;
+.last-gap{
+    -fx-hgap: 7px;
+}
+
+.rotate-180{
+    -fx-rotate: 180deg;
+}
+
+.ship-stat-head:hover, ship-stat-head:pressed, .ship-stat-head:focused,
+.ship-stat-body:hover, ship-stat-body:pressed, .ship-stat-body:focused,
+.ship-stat-tail:hover, ship-stat-tail:pressed, .ship-stat-tail:focused{
+    -fx-effect: none;
+    -fx-cursor: default;
+    -fx-background-color: transparent;
+}
+
+.move-selector{
+    -fx-text-fill: lawngreen;
 }

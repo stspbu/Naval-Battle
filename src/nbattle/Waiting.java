@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static nbattle.JsonUtils.parseMatrices;
-import static nbattle.MainController.MAIN_URL;
-import static nbattle.MainController.createStage;
 import static nbattle.GameLogic.*;
 import static nbattle.Main.*;
+import static nbattle.MainController.*;
 
 
 public class Waiting implements Runnable {
@@ -25,7 +24,7 @@ public class Waiting implements Runnable {
 
     @Override
     public void run() {
-        while (!isConnected) {
+        while (!isConnected && isRun) {
             try {
                 Thread.sleep(DELAY);
             } catch (InterruptedException e) {
@@ -44,6 +43,8 @@ public class Waiting implements Runnable {
     public void connection(ArrayList<String> list, String resultJsonWait) {
         Platform.runLater(() -> {
             try {
+                Main.sNetEnemy = list.get(0);
+
                 createStage();
                 isHost = true;
                 isOnline = true;
@@ -59,12 +60,12 @@ public class Waiting implements Runnable {
                         k--;
                     else if (i == 6)
                         k--;
-                    setShipNet(k, coordinatesFriend[i][2][0] == 1 ? true : false, coordinatesFriend[i][0][0], coordinatesFriend[i][1][0], true);
-                    setShipNet(k, coordinatesEnemy[i][2][0] == 1 ? true : false, coordinatesEnemy[i][0][0], coordinatesEnemy[i][1][0], false);
+                    setShipNet(k, coordinatesFriend[i][2][0] == 1, coordinatesFriend[i][0][0], coordinatesFriend[i][1][0], true);
+                    setShipNet(k, coordinatesEnemy[i][2][0] == 1 , coordinatesEnemy[i][0][0], coordinatesEnemy[i][1][0], false);
                 }
 
-                String resultJson = JsonUtils.parseUrl(MAIN_URL + "mover.php", "&id=" + sNetId);
-                step = JsonUtils.parseMoverJson(resultJson) == isHost;
+                step = (list.get(1).equals("1")) == isHost;
+                changeStepDesign();
                 new Processing();
             } catch (IOException ex) {
                 ex.printStackTrace();

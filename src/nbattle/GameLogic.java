@@ -213,16 +213,7 @@ public class GameLogic {
             countDeath++;
         if ((getCell(field, dx, dy).type != 1) && (getCell(field, dx, dy).type != 2) && (getCell(field, dx, dy).type != 3) && (getCell(field, dx, dy).type != 4)) {
             step = !nextStep;
-
-            if (!step) {
-                for (Cell cell : fieldEnemy) {
-                    cell.getStyleClass().add("no-clickable");
-                }
-            } else {
-                for (Cell cell : fieldEnemy) {
-                    cell.getStyleClass().remove("no-clickable");
-                }
-            }
+            changeStepDesign();
         }
 
         if (getCell(field, dx, dy).type == 0) {
@@ -321,5 +312,23 @@ public class GameLogic {
             if (cell.type == 1)
                 return false;
         return true;
+    }
+
+    public static void changeStepDesign(){
+        if (!step) {
+            for (Cell cell : fieldEnemy) {
+                cell.getStyleClass().add("no-clickable");
+            }
+
+            lastScene.lookup("#enemyNick").getStyleClass().add("move-selector");
+            lastScene.lookup("#friendNick").getStyleClass().remove("move-selector");
+        } else {
+            for (Cell cell : fieldEnemy) {
+                cell.getStyleClass().remove("no-clickable");
+            }
+
+            lastScene.lookup("#friendNick").getStyleClass().add("move-selector");
+            lastScene.lookup("#enemyNick").getStyleClass().remove("move-selector");
+        }
     }
 }

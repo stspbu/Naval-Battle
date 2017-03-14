@@ -36,11 +36,8 @@ public class MainController {
     private Button mainStart, mainNet, btnQuit, btnMain,
             netCreate, netFind;
 
-    @FXML
-    private TextField netNick;
-
-    @FXML
-    public static GridPane gameGrid;
+    private static GridPane gameGrid;
+    private static Label friendNick, enemyNick;
 
     @FXML
     private void buttonListener(ActionEvent e) throws IOException {
@@ -65,6 +62,14 @@ public class MainController {
 
             String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ""};
             gameGrid = (GridPane) root.lookup("#gameGrid");
+
+            // ~ looking up for labels ~
+            friendNick = (Label) root.lookup("#friendNick");
+            enemyNick = (Label) root.lookup("#enemyNick");
+
+            // ~ change the text ~
+            friendNick.setText("Player's fleet");
+            enemyNick.setText("Turing machine");
 
             String btnText;
 
@@ -120,12 +125,21 @@ public class MainController {
             }
             randomPlacer(true);
             randomPlacer(false);
-            GameLoop gameLoop = new GameLoop();
+            new GameLoop();
         } else if (e.getSource() == mainNet) {
             stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("network.fxml"));
 
             TextField local_netNick = (TextField) root.lookup("#netNick");
+
+            if(!sNetId.isEmpty()){
+                // trying to disable the game
+                String resultJson = JsonUtils.parseUrl(MAIN_URL + "inactive.php", "&id=" + sNetId);
+                System.out.println(resultJson);
+
+                // JsonUtils.parseNoParamJson(resultJson);
+                sNetId = "";
+            }
 
             if (!sNetNick.isEmpty()) {
                 local_netNick.setText(sNetNick);
@@ -142,7 +156,6 @@ public class MainController {
         } else if (e.getSource() == netCreate) {
             if (sNetNick.isEmpty()) {
                 alertShow("Incorrect nickname!", "You should enter your nickname before creating a new game.", Alert.AlertType.ERROR);
-
                 return;
             }
 
@@ -166,7 +179,6 @@ public class MainController {
         } else if (e.getSource() == netFind) {
             if (sNetNick.isEmpty()) {
                 alertShow("Incorrect nickname!", "You should enter your nickname before finding games.", Alert.AlertType.ERROR);
-
                 return;
             }
 
@@ -197,6 +209,18 @@ public class MainController {
         } else if (e.getSource() == btnMain) {
             stage = (Stage) lastScene.getWindow();
             root = FXMLLoader.load(getClass().getResource("main.fxml"));
+
+            isOnline = false;
+            gameOver = true;
+
+            if(!sNetId.isEmpty()){
+                // trying to disable the game
+                String resultJson = JsonUtils.parseUrl(MAIN_URL + "inactive.php", "&id=" + sNetId);
+                System.out.println(resultJson);
+
+                // JsonUtils.parseInactiveJson(resultJson);
+                sNetId = "";
+            }
         } else {
             return;
         }
@@ -265,6 +289,9 @@ public class MainController {
             if (sNetNick.equals(sNetEnemy)) {
                 alertShow("Incorrect nickname", "Your nickname is already in-use!", Alert.AlertType.WARNING);
                 return;
+            }else if(!JsonUtils.parseNoParamJson(JsonUtils.parseUrl(MAIN_URL + "isactive.php", "&id=" + sNetId))){
+                alertShow("Invalid game id", "It seems that this game is already started!", Alert.AlertType.WARNING);
+                return;
             }
 
             try {
@@ -277,12 +304,15 @@ public class MainController {
 
             randomPlacer(true);
             randomPlacer(false);
+
             String resultJson = JsonUtils.parseUrl(MAIN_URL + "connect.php", "&id=" +
                     sNetId + "&map1=" + createDuringConnecting(coordinatesEnemy) + "&map2=" +
                     createDuringConnecting(coordinatesFriend) + "&player=" + sNetNick);
 
+            // here was a bug with 1 == false, don't know wtf java's doing, the same nicks were not the crash reason(
             step = JsonUtils.parseMoverJson(resultJson) == isHost;
-            System.out.println(resultJson);
+
+            changeStepDesign();
             new Processing();
         });
 
@@ -290,7 +320,7 @@ public class MainController {
         table.getChildren().add(row);
     }
 
-    private void alertShow(String header, String content, Alert.AlertType type) {
+    public static void alertShow(String header, String content, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(APP_TITLE);
         alert.setHeaderText(header);
@@ -300,16 +330,20 @@ public class MainController {
     }
 
     public static void createStage() throws IOException {
-        Stage stage;
-        Parent root;
-
         resetGlobals();
 
-        stage = (Stage) lastScene.getWindow();
-        root = FXMLLoader.load(controller.getClass().getResource("game.fxml"));
+        Stage stage = (Stage) lastScene.getWindow();
+        Parent root = FXMLLoader.load(controller.getClass().getResource("game.fxml"));
 
         String[] alphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ""};
         gameGrid = (GridPane) root.lookup("#gameGrid");
+
+        // ~ looking up for labels ~
+        friendNick = (Label) root.lookup("#friendNick");
+        enemyNick = (Label) root.lookup("#enemyNick");
+
+        friendNick.setText(sNetNick);
+        enemyNick.setText(sNetEnemy);
 
         String btnText;
 

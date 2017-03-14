@@ -1,6 +1,12 @@
 package nbattle;
 
 import com.sun.istack.internal.Nullable;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,6 +21,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static nbattle.GameLogic.gameOver;
+import static nbattle.Main.controller;
+import static nbattle.MainController.alertShow;
+import static nbattle.MainController.lastScene;
 
 
 public class JsonUtils {
@@ -109,26 +120,6 @@ public class JsonUtils {
         return null;
     }
 
-    public static boolean parseConnectJson(String resultJson) {
-        try {
-            JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
-
-            System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
-
-            if (gamesJsonObject.get("info") == null) {
-                System.out.println("Кто ходит? " + gamesJsonObject.get("mover"));
-                return true;
-            }
-
-            System.out.println("Ошибка: " + gamesJsonObject.get("info"));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
     @Nullable
     public static ArrayList<String> parseStatusJson(String resultJson) {
         ArrayList<String> list = new ArrayList<>();
@@ -154,7 +145,7 @@ public class JsonUtils {
         return null;
     }
 
-    public static boolean parseDeleteJson(String resultJson) {
+    public static boolean parseNoParamJson(String resultJson) {
         try {
             JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
 
@@ -260,10 +251,10 @@ public class JsonUtils {
     @Nullable
     public static Point parseCoordJson(String resultJson) {
         Point point = new Point();
+
         try {
             JSONObject gamesJsonObject = (JSONObject) JSONValue.parseWithException(resultJson);
             System.out.println("Состояние сервера: " + gamesJsonObject.get("msg"));
-
             if (gamesJsonObject.get("info") == null) {
                 String coord = gamesJsonObject.get("coord").toString(); //"5 , 6"
                 coord = coord.trim();
@@ -272,10 +263,33 @@ public class JsonUtils {
                 point.y = Integer.parseInt(coordNew[1]);
 
                 return point;
+            }else{
+                if(!gamesJsonObject.get("info").toString().equals("empty coordinates") && Main.isOnline) {
+                    Main.isOnline = false;
+                    gameOver = true;
+
+                    Platform.runLater(() -> {
+                        if (gamesJsonObject.get("info").toString().equals("disconnected")) {
+                            alertShow("The game has interrupted", "Your enemy has disconnected from the server!", Alert.AlertType.ERROR);
+                        } else {
+                            alertShow("Unexpected error", "You have been disconnected from the server!", Alert.AlertType.ERROR);
+                        }
+
+                        try {
+                            Stage stage = (Stage) lastScene.getWindow();
+                            Parent root = FXMLLoader.load(controller.getClass().getResource("main.fxml"));
+
+                            lastScene = new Scene(root);
+                            stage.setScene(lastScene);
+                            stage.show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
 
             System.out.println("Ошибка: " + gamesJsonObject.get("info"));
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
