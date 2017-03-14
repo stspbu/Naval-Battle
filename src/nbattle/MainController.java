@@ -289,10 +289,10 @@ public class MainController {
             if (sNetNick.equals(sNetEnemy)) {
                 alertShow("Incorrect nickname", "Your nickname is already in-use!", Alert.AlertType.WARNING);
                 return;
-            }/*else if(!JsonUtils.parseNoParamJson(JsonUtils.parseUrl(MAIN_URL + "isactive.php", "&id=" + sNetId))){
+            }else if(!JsonUtils.parseNoParamJson(JsonUtils.parseUrl(MAIN_URL + "isactive.php", "&id=" + sNetId))){
                 alertShow("Invalid game id", "It seems that this game is already started!", Alert.AlertType.WARNING);
                 return;
-            }*/
+            }
 
             try {
                 createStage();
