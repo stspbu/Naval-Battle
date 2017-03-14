@@ -20,19 +20,15 @@ public class GameLogic {
     // Постановка корабля на поле.
     private static void setShip(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
         if (isLeftSide) {
-            coordinatesFriend[idFriend][0][0] = xPos;
-            coordinatesFriend[idFriend][1][0] = yPos;
-            coordinatesFriend[idFriend][2][0] = (horizontal) ? 1 : 0;
             idFriend++;
-            if (idFriend > 9)
-                idFriend = 0;
+            coordinatesFriend[idFriend - 1][0][0] = xPos;
+            coordinatesFriend[idFriend - 1][1][0] = yPos;
+            coordinatesFriend[idFriend - 1][2][0] = (horizontal) ? 1 : 0;
         } else {
-            coordinatesEnemy[idEnemy][0][0] = xPos;
-            coordinatesEnemy[idEnemy][1][0] = yPos;
-            coordinatesEnemy[idEnemy][2][0] = (horizontal) ? 1 : 0;
             idEnemy++;
-            if (idEnemy > 9)
-                idEnemy = 0;
+            coordinatesEnemy[idEnemy - 1][0][0] = xPos;
+            coordinatesEnemy[idEnemy - 1][1][0] = yPos;
+            coordinatesEnemy[idEnemy - 1][2][0] = (horizontal) ? 1 : 0;
         }
 
         if (horizontal) {
@@ -52,18 +48,19 @@ public class GameLogic {
                 }
             }
         }
+
+        if (idFriend > 9)
+            idFriend = 0;
+        if (idEnemy > 9)
+            idEnemy = 0;
     }
 
     // Постановка корабля на поле network.
     public static void setShipNet(int shipSize, boolean horizontal, int xPos, int yPos, boolean isLeftSide) {
         if (isLeftSide) {
             idFriend++;
-            if (idFriend > 9)
-                idFriend = 0;
         } else {
             idEnemy++;
-            if (idEnemy > 9)
-                idEnemy = 0;
         }
 
         if (horizontal) {
@@ -83,6 +80,11 @@ public class GameLogic {
                 }
             }
         }
+
+        if (idFriend > 9)
+            idFriend = 0;
+        if (idEnemy > 9)
+            idEnemy = 0;
     }
 
     // Постановка блока корабля на поле.
@@ -283,8 +285,6 @@ public class GameLogic {
                             }
                     }
                 }
-                if (countDeathEnemy == 10 || countDeathFriend == 10)
-                    gameOver = true;
                 switch (counter) {
                     case 1:
                         if (!step)
@@ -315,6 +315,8 @@ public class GameLogic {
                     changeCountShip(true);
                 else
                     changeCountShip(false);
+                if (countDeathEnemy == 10 || countDeathFriend == 10)
+                    gameOver = true;
             } else {
                 int dy1 = dy - 1, dy2 = dy + 1;
                 int dx1 = dx - 1, dx2 = dx + 1;
