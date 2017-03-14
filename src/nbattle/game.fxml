@@ -23,7 +23,7 @@
          <children>
             <FlowPane prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
                <children>
-                  <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                  <Button fx:id="left4" mnemonicParsing="false" styleClass="g_info" text="0" />
                   <Button mnemonicParsing="false">
                      <styleClass>
                         <String fx:value="g_ship" />
@@ -60,7 +60,7 @@
             </FlowPane>
             <FlowPane layoutY="35.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
                <children>
-                  <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                  <Button fx:id="left3" mnemonicParsing="false" styleClass="g_info" text="0" />
                   <Button mnemonicParsing="false">
                      <styleClass>
                         <String fx:value="g_ship" />
@@ -83,7 +83,7 @@
             </FlowPane>
             <FlowPane layoutY="70.0" prefHeight="50.0" prefWidth="200.0" styleClass="flow-stat">
                <children>
-                  <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                  <Button fx:id="left2" mnemonicParsing="false" styleClass="g_info" text="0" />
                   <Button mnemonicParsing="false">
                      <styleClass>
                         <String fx:value="g_ship" />
@@ -100,7 +100,7 @@
             </FlowPane>
             <FlowPane layoutY="105.0" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                  <Button fx:id="left1" mnemonicParsing="false" styleClass="g_info" text="0" />
                   <Button mnemonicParsing="false">
                      <styleClass>
                         <String fx:value="g_ship" />
@@ -156,7 +156,7 @@
                         <String fx:value="rotate-180" />
                             </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right4" mnemonicParsing="false" styleClass="g_info" text="0" />
                     </children>
                 </FlowPane>
                 <FlowPane alignment="TOP_RIGHT" layoutY="35.0" prefHeight="50.0" prefWidth="350.0" styleClass="flow-stat-right">
@@ -182,7 +182,7 @@
                         <String fx:value="rotate-180" />
                             </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right3" mnemonicParsing="false" styleClass="g_info" text="0" />
                     </children>
                 </FlowPane>
                 <FlowPane alignment="TOP_RIGHT" layoutY="70.0" prefHeight="50.0" prefWidth="50.0" styleClass="flow-stat-right">
@@ -201,7 +201,7 @@
                         <String fx:value="rotate-180" />
                             </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right2" mnemonicParsing="false" styleClass="g_info" text="0" />
                     </children>
                 </FlowPane>
                 <FlowPane alignment="TOP_RIGHT" layoutY="105.0" prefHeight="50.0" prefWidth="350.0">
@@ -212,7 +212,7 @@
                                 <String fx:value="ship-stat-body" />
                             </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="g_info" text="0" />
+                        <Button fx:id="right1" mnemonicParsing="false" styleClass="g_info" text="0" />
                     </children>
                <styleClass>
                   <String fx:value="flow-stat-right" />
