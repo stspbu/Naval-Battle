@@ -263,8 +263,8 @@ public class JsonUtils {
                 point.y = Integer.parseInt(coordNew[1]);
 
                 return point;
-            }else{
-                if(!gamesJsonObject.get("info").toString().equals("empty coordinates") && Main.isOnline) {
+            } else {
+                if (!gamesJsonObject.get("info").toString().equals("empty coordinates") && Main.isOnline) {
                     Main.isOnline = false;
                     gameOver = true;
 
@@ -282,7 +282,7 @@ public class JsonUtils {
                             lastScene = new Scene(root);
                             stage.setScene(lastScene);
                             stage.show();
-                        }catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     });
