@@ -37,7 +37,10 @@ public class MainController {
     private Button mainStart, mainNet, btnQuit, btnMain,
             netCreate, netFind;
 
+    @FXML
     private static GridPane gameGrid;
+
+    @FXML
     private static Label friendNick, enemyNick;
 
     @FXML
