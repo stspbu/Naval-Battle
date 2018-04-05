@@ -1,7 +1,5 @@
 # Naval-Battle
 
-Simple and classic battleship game.
-
 ## Screenshots
 
 | Main menu                                                        |
@@ -15,10 +13,6 @@ Simple and classic battleship game.
 ## Download
 
 Compiled jar-file can be found [here](https://github.com/Vasar007/Naval-Battle/tree/master/Source/out/artifacts/NavalBattle_jar).
-
-## Compiling
-
-This project needs in JavaFX and at least Java 8.0
 
 ## License information
 
