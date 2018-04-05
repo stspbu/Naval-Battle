@@ -23,4 +23,5 @@ This project needs in JavaFX and at least Java 8.0
 ## License information
 
 This project is licensed under the terms of the [MIT License](LICENSE).
+
 The newest version located here: https://github.com/Vasar007/Naval-Battle
